@@ -1,12 +1,13 @@
-import 'package:e_commerce_app_getx/utils/colors.dart';
-import 'package:e_commerce_app_getx/utils/dimension.dart';
-import 'package:e_commerce_app_getx/widgets/app_icon.dart';
-import 'package:e_commerce_app_getx/widgets/big_text.dart';
-import 'package:e_commerce_app_getx/widgets/expandable_text_widget.dart';
 import 'package:flutter/material.dart';
 
-class RecommendedFoodDetail extends StatelessWidget {
-  const RecommendedFoodDetail({Key? key}) : super(key: key);
+import '../../utils/colors.dart';
+import '../../utils/dimension.dart';
+import '../widgets/app_icon.dart';
+import '../widgets/big_text.dart';
+import '../widgets/expandable_text_widget.dart';
+
+class WomenClothingPageDetail extends StatelessWidget {
+  const WomenClothingPageDetail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

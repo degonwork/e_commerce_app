@@ -3,7 +3,9 @@ class AppConstants {
   static const int APP_VERSION = 1;
 
   static const String BASE_URL = 'https://fakestoreapi.com';
-  static const String POPULAR_PRODUCT_URL = "/products/category/electronics";
+  static const String ELECTRONICS_URL = "/products/category/electronics";
+  static const String WOMEN_CLOTHING_URL =
+      "/products/category/women's clothing";
 
   static const String TOKEN = "DBtoken";
 }

@@ -1,5 +1,6 @@
-import 'package:e_commerce_app_getx/utils/dimension.dart';
 import 'package:flutter/material.dart';
+
+import '../../utils/dimension.dart';
 
 class BigText extends StatelessWidget {
   Color? color;

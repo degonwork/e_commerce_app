@@ -1,8 +1,9 @@
 import 'package:e_commerce_app_getx/controllers/electronics_controller.dart';
-import 'package:e_commerce_app_getx/pages/home/main_food_page.dart';
+import 'package:e_commerce_app_getx/controllers/women_clothing_controller.dart';
+import 'package:e_commerce_app_getx/ui/pages/home/main_product_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:e_commerce_app_getx/helper/dependencies.dart' as dep;
+import 'package:e_commerce_app_getx/bindings/dependencies.dart' as dep;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.find<ElectronicsController>().getPopularProductList();
+    Get.find<ElectronicsController>().getElectronicsList();
+    Get.find<WomenClothingController>().getWomenClothingList();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',

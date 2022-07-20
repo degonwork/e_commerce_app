@@ -1,14 +1,13 @@
-import 'package:e_commerce_app_getx/utils/colors.dart';
-import 'package:e_commerce_app_getx/utils/dimension.dart';
-import 'package:e_commerce_app_getx/widgets/app_icon.dart';
-import 'package:e_commerce_app_getx/widgets/big_text.dart';
-import 'package:e_commerce_app_getx/widgets/expandable_text_widget.dart';
 import 'package:flutter/material.dart';
+import '../../utils/colors.dart';
+import '../../utils/dimension.dart';
+import '../widgets/app_column.dart';
+import '../widgets/app_icon.dart';
+import '../widgets/big_text.dart';
+import '../widgets/expandable_text_widget.dart';
 
-import '../../widgets/app_column.dart';
-
-class PopularFoodPageDetail extends StatelessWidget {
-  const PopularFoodPageDetail({Key? key}) : super(key: key);
+class ElectronicsPageDetail extends StatelessWidget {
+  const ElectronicsPageDetail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

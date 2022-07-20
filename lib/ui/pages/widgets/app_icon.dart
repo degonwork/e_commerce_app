@@ -1,7 +1,4 @@
-import 'package:e_commerce_app_getx/utils/dimension.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class AppIcon extends StatelessWidget {
   final IconData icon;

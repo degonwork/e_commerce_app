@@ -1,10 +1,11 @@
-import 'package:e_commerce_app_getx/widgets/big_text.dart';
-import 'package:e_commerce_app_getx/widgets/icon_and_text_widget.dart';
-import 'package:e_commerce_app_getx/widgets/small_text.dart';
+import 'package:e_commerce_app_getx/ui/pages/widgets/big_text.dart';
+import 'package:e_commerce_app_getx/ui/pages/widgets/icon_and_text_widget.dart';
+import 'package:e_commerce_app_getx/ui/pages/widgets/small_text.dart';
+
 import 'package:flutter/material.dart';
 
-import '../utils/colors.dart';
-import '../utils/dimension.dart';
+import '../../utils/colors.dart';
+import '../../utils/dimension.dart';
 
 class AppColumn extends StatelessWidget {
   final String text;
