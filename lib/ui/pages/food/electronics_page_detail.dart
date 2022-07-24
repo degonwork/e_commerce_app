@@ -18,10 +18,9 @@ class ElectronicsPageDetail extends StatelessWidget {
   final int? pageId;
   @override
   Widget build(BuildContext context) {
-    var electronics =
-        Get.find<ElectronicsController>().electronicsList[pageId!];
+    var product = Get.find<ElectronicsController>().productList[pageId!];
     Get.find<ElectronicsController>()
-        .initProduct(electronics, Get.find<CartController>());
+        .initProduct(product, Get.find<CartController>());
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -35,7 +34,7 @@ class ElectronicsPageDetail extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: NetworkImage(electronics.image!),
+                  image: NetworkImage(product.image!),
                 ),
               ),
             ),
@@ -52,7 +51,39 @@ class ElectronicsPageDetail extends StatelessWidget {
                       Get.to(() => MainProductPage());
                     },
                     child: AppIcon(icon: Icons.arrow_back_ios)),
-                AppIcon(icon: Icons.shopping_cart_outlined),
+                GetBuilder<ElectronicsController>(
+                    builder: (electronicsController) {
+                  return Stack(
+                    children: [
+                      AppIcon(icon: Icons.shopping_cart_outlined),
+                      Get.find<ElectronicsController>().totalItems >= 1
+                          ? Positioned(
+                              right: 0,
+                              top: 0,
+                              child: AppIcon(
+                                icon: Icons.circle,
+                                size: 20,
+                                iconColor: Colors.transparent,
+                                backgroundColor: AppColors.mainColor,
+                              ),
+                            )
+                          : Container(),
+                      Get.find<ElectronicsController>().totalItems >= 1
+                          ? Positioned(
+                              top: 3,
+                              right: 3,
+                              child: BigText(
+                                text: Get.find<ElectronicsController>()
+                                    .totalItems
+                                    .toString(),
+                                size: 12,
+                                color: Colors.white,
+                              ),
+                            )
+                          : Container()
+                    ],
+                  );
+                }),
               ],
             ),
           ),
@@ -77,17 +108,16 @@ class ElectronicsPageDetail extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AppColumn(
-                      text: electronics.title!,
-                      ratingRate: electronics.rating!.rate,
-                      ratingCount: electronics.rating!.count,
+                      text: product.title!,
+                      ratingRate: product.rating!.rate,
+                      ratingCount: product.rating!.count,
                     ),
                     SizedBox(height: Dimensions.height20),
                     BigText(text: 'Introduce'),
                     SizedBox(height: Dimensions.height20),
                     Expanded(
                       child: SingleChildScrollView(
-                        child: ExpandableTextWidget(
-                            text: electronics.description!),
+                        child: ExpandableTextWidget(text: product.description!),
                       ),
                     ),
                   ]),
@@ -154,10 +184,10 @@ class ElectronicsPageDetail extends StatelessWidget {
                 ),
                 child: GestureDetector(
                   onTap: () {
-                    electronicsController.addItem(electronics);
+                    electronicsController.addItem(product);
                   },
                   child: BigText(
-                      text: '\$ ${electronics.price} | Add to cart',
+                      text: '\$ ${product.price} | Add to cart',
                       color: Colors.white),
                 ),
                 decoration: BoxDecoration(

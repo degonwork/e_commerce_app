@@ -1,9 +1,7 @@
-import 'package:e_commerce_app_getx/data/models/electronics_model.dart';
+import 'package:e_commerce_app_getx/data/models/product_model.dart';
 import 'package:e_commerce_app_getx/data/responsitory/cart_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
-
 import '../data/models/cart_model.dart';
 import '../ui/utils/colors.dart';
 
@@ -14,10 +12,10 @@ class CartController extends GetxController {
   Map<int, Cart> _items = {};
   Map<int, Cart> get items => _items;
 
-  void addItem(Electronics electronics, int quantity) {
+  void addItem(Product product, int quantity) {
     var totalQuantity = 0;
-    if (_items.containsKey(electronics.id)) {
-      _items.update(electronics.id!, (value) {
+    if (_items.containsKey(product.id)) {
+      _items.update(product.id!, (value) {
         totalQuantity = value.quantity! + quantity;
         return Cart(
           id: value.id,
@@ -30,16 +28,16 @@ class CartController extends GetxController {
         );
       });
       if (totalQuantity <= 0) {
-        _items.remove(electronics.id);
+        _items.remove(product.id);
       }
     } else {
       if (quantity > 0) {
-        _items.putIfAbsent(electronics.id!, () {
+        _items.putIfAbsent(product.id!, () {
           return Cart(
-            id: electronics.id,
-            title: electronics.title,
-            price: electronics.price,
-            image: electronics.image,
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            image: product.image,
             quantity: quantity,
             isExit: true,
             time: DateTime.now().toString(),
@@ -56,23 +54,31 @@ class CartController extends GetxController {
     }
   }
 
-  bool isExitInCart(Electronics electronics) {
-    if (_items.containsKey(electronics.id)) {
+  bool isExitInCart(Product product) {
+    if (_items.containsKey(product.id)) {
       return true;
     } else {
       return false;
     }
   }
 
-  int getQuantity(Electronics electronics) {
+  int getQuantity(Product product) {
     var quantity = 0;
-    if (_items.containsKey(electronics.id)) {
+    if (_items.containsKey(product.id)) {
       _items.forEach((key, value) {
-        if (key == electronics.id) {
+        if (key == product.id) {
           quantity = value.quantity!;
         }
       });
     }
     return quantity;
+  }
+
+  int get totalItems {
+    var totalItems = 0;
+    _items.forEach((key, value) {
+      totalItems += value.quantity!;
+    });
+    return totalItems;
   }
 }

@@ -1,4 +1,4 @@
-class WomenClothing {
+class Product {
   final int? id;
   final String? title;
   final num? price;
@@ -7,7 +7,7 @@ class WomenClothing {
   final String? image;
   final Rating? rating;
 
-  WomenClothing(
+  Product(
       {required this.id,
       required this.title,
       required this.price,
@@ -16,8 +16,8 @@ class WomenClothing {
       required this.image,
       required this.rating});
 
-  factory WomenClothing.fromJson(Map<String, dynamic> json) {
-    return WomenClothing(
+  factory Product.fromJson(Map<String, dynamic> json) {
+    return Product(
         id: json['id'],
         title: json['title'],
         price: json['price'],

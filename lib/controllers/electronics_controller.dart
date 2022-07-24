@@ -4,13 +4,13 @@ import 'package:e_commerce_app_getx/data/responsitory/electronics_repo.dart';
 import 'package:e_commerce_app_getx/ui/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../data/models/electronics_model.dart';
+import '../data/models/product_model.dart';
 
 class ElectronicsController extends GetxController {
   final ElectronicsRepo elctronicsRepo;
   ElectronicsController({required this.elctronicsRepo});
-  List<Electronics> _electronicsList = [];
-  List<Electronics> get electronicsList => _electronicsList;
+  List<Product> _productList = [];
+  List<Product> get productList => _productList;
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
   int _quantity = 0;
@@ -24,9 +24,9 @@ class ElectronicsController extends GetxController {
     if (response.statusCode == 200) {
       print('got electronics');
       List<dynamic> result = jsonDecode(jsonEncode(response.body));
-      _electronicsList = [];
+      _productList = [];
       for (var element in result) {
-        _electronicsList.add(Electronics.fromJson(element));
+        _productList.add(Product.fromJson(element));
       }
       _isLoaded = true;
       update();
@@ -52,6 +52,10 @@ class ElectronicsController extends GetxController {
         backgroundColor: AppColors.mainColor,
         colorText: Colors.white,
       );
+      if (_inCartItem > 0) {
+        _quantity = -_inCartItem;
+        return _quantity;
+      }
       return 0;
     } else if ((_inCartItem + quantity) > 20) {
       Get.snackbar(
@@ -65,26 +69,31 @@ class ElectronicsController extends GetxController {
     return quantity;
   }
 
-  void initProduct(Electronics electronics, CartController cart) {
+  void initProduct(Product product, CartController cart) {
     _quantity = 0;
     _inCartItem = 0;
     _cart = cart;
     var exist = false;
-    exist = _cart.isExitInCart(electronics);
+    exist = _cart.isExitInCart(product);
     if (exist) {
-      _inCartItem = cart.getQuantity(electronics);
+      _inCartItem = cart.getQuantity(product);
     }
   }
 
-  void addItem(Electronics electronics) {
-    _cart.addItem(electronics, _quantity);
+  void addItem(Product product) {
+    _cart.addItem(product, _quantity);
     _quantity = 0;
-    _inCartItem = _cart.getQuantity(electronics);
+    _inCartItem = _cart.getQuantity(product);
     _cart.items.forEach((key, value) {
       print("id: " +
           value.id.toString() +
           " quantity " +
           value.quantity.toString());
     });
+    update();
+  }
+
+  int get totalItems {
+    return _cart.totalItems;
   }
 }

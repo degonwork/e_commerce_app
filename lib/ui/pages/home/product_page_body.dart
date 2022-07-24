@@ -4,7 +4,7 @@ import 'package:e_commerce_app_getx/controllers/women_clothing_controller.dart';
 import 'package:e_commerce_app_getx/routes/route_helper.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import '../../../data/models/electronics_model.dart';
+import '../../../data/models/product_model.dart';
 import '../../utils/colors.dart';
 import '../../utils/dimension.dart';
 import '../widgets/app_column.dart';
@@ -46,16 +46,16 @@ class _ProductPageBodyState extends State<ProductPageBody> {
     return Column(
       children: [
         GetBuilder<ElectronicsController>(
-          builder: (electronics) {
-            return electronics.isLoaded
+          builder: (product) {
+            return product.isLoaded
                 ? Container(
                     height: Dimensions.pageView,
                     child: PageView.builder(
                       controller: pageController,
-                      itemCount: electronics.electronicsList.length,
+                      itemCount: product.productList.length,
                       itemBuilder: (context, position) {
                         return _buildPageItem(
-                            position, electronics.electronicsList[position]);
+                            position, product.productList[position]);
                       },
                     ),
                   )
@@ -64,11 +64,10 @@ class _ProductPageBodyState extends State<ProductPageBody> {
                   );
           },
         ),
-        GetBuilder<ElectronicsController>(builder: (electronics) {
+        GetBuilder<ElectronicsController>(builder: (product) {
           return DotsIndicator(
-            dotsCount: electronics.electronicsList.isEmpty
-                ? 1
-                : electronics.electronicsList.length,
+            dotsCount:
+                product.productList.isEmpty ? 1 : product.productList.length,
             position: _currPageValue,
             decorator: DotsDecorator(
               activeColor: AppColors.mainColor,
@@ -99,12 +98,12 @@ class _ProductPageBodyState extends State<ProductPageBody> {
             ],
           ),
         ),
-        GetBuilder<WomenClothingController>(builder: (womenClothing) {
-          return womenClothing.isLoaded
+        GetBuilder<WomenClothingController>(builder: (product) {
+          return product.isLoaded
               ? ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: womenClothing.womenCloThingList.length,
+                  itemCount: product.productList.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
@@ -126,8 +125,8 @@ class _ProductPageBodyState extends State<ProductPageBody> {
                                 color: Colors.white38,
                                 image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: NetworkImage(womenClothing
-                                        .womenCloThingList[index].image!)),
+                                    image: NetworkImage(
+                                        product.productList[index].image!)),
                               ),
                             ),
                             Expanded(
@@ -151,13 +150,12 @@ class _ProductPageBodyState extends State<ProductPageBody> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       BigText(
-                                          text: womenClothing
-                                              .womenCloThingList[index].title!),
+                                          text: product
+                                              .productList[index].title!),
                                       SizedBox(height: Dimensions.height10),
                                       SmallText(
-                                          text: womenClothing
-                                              .womenCloThingList[index]
-                                              .category!),
+                                          text: product
+                                              .productList[index].category!),
                                       SizedBox(height: Dimensions.height10),
                                       Row(
                                         mainAxisAlignment:
@@ -198,7 +196,7 @@ class _ProductPageBodyState extends State<ProductPageBody> {
     );
   }
 
-  Widget _buildPageItem(int index, Electronics electronics) {
+  Widget _buildPageItem(int index, Product product) {
     Matrix4 matrix = new Matrix4.identity();
     if (index == _currPageValue.floor()) {
       var currScale = 1 - (_currPageValue - index) * (1 - _scaleFactor);
@@ -240,7 +238,7 @@ class _ProductPageBodyState extends State<ProductPageBody> {
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: NetworkImage(
-                    electronics.image!,
+                    product.image!,
                   ),
                 ),
               ),
@@ -277,9 +275,9 @@ class _ProductPageBodyState extends State<ProductPageBody> {
                   padding: EdgeInsets.only(
                       top: Dimensions.height15, left: 15, right: 15),
                   child: AppColumn(
-                    ratingCount: electronics.rating!.count,
-                    ratingRate: electronics.rating!.rate,
-                    text: electronics.title!,
+                    ratingCount: product.rating!.count,
+                    ratingRate: product.rating!.rate,
+                    text: product.title!,
                   )),
             ),
           ),
