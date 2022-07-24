@@ -1,6 +1,6 @@
 import 'package:e_commerce_app_getx/controllers/electronics_controller.dart';
 import 'package:e_commerce_app_getx/controllers/women_clothing_controller.dart';
-import 'package:e_commerce_app_getx/ui/pages/home/main_product_page.dart';
+import 'package:e_commerce_app_getx/routes/route_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:e_commerce_app_getx/bindings/dependencies.dart' as dep;
@@ -24,7 +24,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MainFoodPage(),
+      initialRoute: RouteHelper.initial,
+      getPages: RouteHelper.routes,
     );
   }
 }
