@@ -1,5 +1,6 @@
 import 'package:e_commerce_app_getx/controllers/cart_controller.dart';
 import 'package:e_commerce_app_getx/controllers/electronics_controller.dart';
+import 'package:e_commerce_app_getx/routes/route_helper.dart';
 import 'package:e_commerce_app_getx/ui/pages/home/main_product_page.dart';
 import 'package:flutter/material.dart';
 import '../../utils/colors.dart';
@@ -18,7 +19,7 @@ class ElectronicsPageDetail extends StatelessWidget {
   final int? pageId;
   @override
   Widget build(BuildContext context) {
-    var product = Get.find<ElectronicsController>().productList[pageId!];
+    var product = Get.find<ElectronicsController>().electronicsList[pageId!];
     Get.find<ElectronicsController>()
         .initProduct(product, Get.find<CartController>());
     return Scaffold(
@@ -53,35 +54,42 @@ class ElectronicsPageDetail extends StatelessWidget {
                     child: AppIcon(icon: Icons.arrow_back_ios)),
                 GetBuilder<ElectronicsController>(
                     builder: (electronicsController) {
-                  return Stack(
-                    children: [
-                      AppIcon(icon: Icons.shopping_cart_outlined),
-                      Get.find<ElectronicsController>().totalItems >= 1
-                          ? Positioned(
-                              right: 0,
-                              top: 0,
-                              child: AppIcon(
-                                icon: Icons.circle,
-                                size: 20,
-                                iconColor: Colors.transparent,
-                                backgroundColor: AppColors.mainColor,
-                              ),
-                            )
-                          : Container(),
-                      Get.find<ElectronicsController>().totalItems >= 1
-                          ? Positioned(
-                              top: 3,
-                              right: 3,
-                              child: BigText(
-                                text: Get.find<ElectronicsController>()
-                                    .totalItems
-                                    .toString(),
-                                size: 12,
-                                color: Colors.white,
-                              ),
-                            )
-                          : Container()
-                    ],
+                  return GestureDetector(
+                    onTap: () {
+                      if (electronicsController.totalItems >= 1) {
+                        Get.toNamed(RouteHelper.getcart());
+                      }
+                    },
+                    child: Stack(
+                      children: [
+                        AppIcon(icon: Icons.shopping_cart_outlined),
+                        Get.find<ElectronicsController>().totalItems >= 1
+                            ? Positioned(
+                                right: 0,
+                                top: 0,
+                                child: AppIcon(
+                                  icon: Icons.circle,
+                                  size: 20,
+                                  iconColor: Colors.transparent,
+                                  backgroundColor: AppColors.mainColor,
+                                ),
+                              )
+                            : Container(),
+                        Get.find<ElectronicsController>().totalItems >= 1
+                            ? Positioned(
+                                top: 3,
+                                right: 3,
+                                child: BigText(
+                                  text: Get.find<ElectronicsController>()
+                                      .totalItems
+                                      .toString(),
+                                  size: 12,
+                                  color: Colors.white,
+                                ),
+                              )
+                            : Container()
+                      ],
+                    ),
                   );
                 }),
               ],

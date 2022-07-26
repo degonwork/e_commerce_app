@@ -4,13 +4,14 @@ import 'package:e_commerce_app_getx/data/responsitory/electronics_repo.dart';
 import 'package:e_commerce_app_getx/ui/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../data/models/cart_model.dart';
 import '../data/models/product_model.dart';
 
 class ElectronicsController extends GetxController {
   final ElectronicsRepo elctronicsRepo;
   ElectronicsController({required this.elctronicsRepo});
-  List<Product> _productList = [];
-  List<Product> get productList => _productList;
+  List<Product> _electronicsList = [];
+  List<Product> get electronicsList => _electronicsList;
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
   int _quantity = 0;
@@ -24,9 +25,9 @@ class ElectronicsController extends GetxController {
     if (response.statusCode == 200) {
       print('got electronics');
       List<dynamic> result = jsonDecode(jsonEncode(response.body));
-      _productList = [];
+      _electronicsList = [];
       for (var element in result) {
-        _productList.add(Product.fromJson(element));
+        _electronicsList.add(Product.fromJson(element));
       }
       _isLoaded = true;
       update();
@@ -95,5 +96,9 @@ class ElectronicsController extends GetxController {
 
   int get totalItems {
     return _cart.totalItems;
+  }
+
+  List<Cart> get getItems {
+    return _cart.getItems;
   }
 }

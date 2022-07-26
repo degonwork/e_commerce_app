@@ -1,6 +1,7 @@
 import 'package:e_commerce_app_getx/controllers/electronics_controller.dart';
 import 'package:e_commerce_app_getx/controllers/women_clothing_controller.dart';
 import 'package:e_commerce_app_getx/routes/route_helper.dart';
+import 'package:e_commerce_app_getx/ui/pages/cart/cart_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controllers/cart_controller.dart';
@@ -16,7 +17,8 @@ class WomenClothingPageDetail extends StatelessWidget {
   final int? pageId;
   @override
   Widget build(BuildContext context) {
-    var product = Get.find<WomenClothingController>().productList[pageId!];
+    var product =
+        Get.find<WomenClothingController>().womenClothingList[pageId!];
     Get.find<ElectronicsController>()
         .initProduct(product, Get.find<CartController>());
     return Scaffold(
@@ -36,35 +38,42 @@ class WomenClothingPageDetail extends StatelessWidget {
                       child: AppIcon(icon: Icons.clear)),
                   GetBuilder<ElectronicsController>(
                       builder: (electronicsController) {
-                    return Stack(
-                      children: [
-                        AppIcon(icon: Icons.shopping_cart_outlined),
-                        Get.find<ElectronicsController>().totalItems >= 1
-                            ? Positioned(
-                                right: 0,
-                                top: 0,
-                                child: AppIcon(
-                                  icon: Icons.circle,
-                                  size: 20,
-                                  iconColor: Colors.transparent,
-                                  backgroundColor: AppColors.mainColor,
-                                ),
-                              )
-                            : Container(),
-                        Get.find<ElectronicsController>().totalItems >= 1
-                            ? Positioned(
-                                top: 3,
-                                right: 3,
-                                child: BigText(
-                                  text: Get.find<ElectronicsController>()
-                                      .totalItems
-                                      .toString(),
-                                  size: 12,
-                                  color: Colors.white,
-                                ),
-                              )
-                            : Container()
-                      ],
+                    return GestureDetector(
+                      onTap: () {
+                        if (electronicsController.totalItems >= 1) {
+                          Get.toNamed(RouteHelper.getcart());
+                        }
+                      },
+                      child: Stack(
+                        children: [
+                          AppIcon(icon: Icons.shopping_cart_outlined),
+                          Get.find<ElectronicsController>().totalItems >= 1
+                              ? Positioned(
+                                  right: 0,
+                                  top: 0,
+                                  child: AppIcon(
+                                    icon: Icons.circle,
+                                    size: 20,
+                                    iconColor: Colors.transparent,
+                                    backgroundColor: AppColors.mainColor,
+                                  ),
+                                )
+                              : Container(),
+                          Get.find<ElectronicsController>().totalItems >= 1
+                              ? Positioned(
+                                  top: 3,
+                                  right: 3,
+                                  child: BigText(
+                                    text: Get.find<ElectronicsController>()
+                                        .totalItems
+                                        .toString(),
+                                    size: 12,
+                                    color: Colors.white,
+                                  ),
+                                )
+                              : Container()
+                        ],
+                      ),
                     );
                   }),
                 ],

@@ -25,6 +25,7 @@ class CartController extends GetxController {
           quantity: value.quantity! + quantity,
           isExit: true,
           time: DateTime.now().toString(),
+          product: product,
         );
       });
       if (totalQuantity <= 0) {
@@ -41,6 +42,7 @@ class CartController extends GetxController {
             quantity: quantity,
             isExit: true,
             time: DateTime.now().toString(),
+            product: product,
           );
         });
       } else {
@@ -52,6 +54,7 @@ class CartController extends GetxController {
         );
       }
     }
+    update();
   }
 
   bool isExitInCart(Product product) {
@@ -80,5 +83,11 @@ class CartController extends GetxController {
       totalItems += value.quantity!;
     });
     return totalItems;
+  }
+
+  List<Cart> get getItems {
+    return _items.entries.map((e) {
+      return e.value;
+    }).toList();
   }
 }

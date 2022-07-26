@@ -52,10 +52,10 @@ class _ProductPageBodyState extends State<ProductPageBody> {
                     height: Dimensions.pageView,
                     child: PageView.builder(
                       controller: pageController,
-                      itemCount: product.productList.length,
+                      itemCount: product.electronicsList.length,
                       itemBuilder: (context, position) {
                         return _buildPageItem(
-                            position, product.productList[position]);
+                            position, product.electronicsList[position]);
                       },
                     ),
                   )
@@ -66,8 +66,9 @@ class _ProductPageBodyState extends State<ProductPageBody> {
         ),
         GetBuilder<ElectronicsController>(builder: (product) {
           return DotsIndicator(
-            dotsCount:
-                product.productList.isEmpty ? 1 : product.productList.length,
+            dotsCount: product.electronicsList.isEmpty
+                ? 1
+                : product.electronicsList.length,
             position: _currPageValue,
             decorator: DotsDecorator(
               activeColor: AppColors.mainColor,
@@ -103,7 +104,7 @@ class _ProductPageBodyState extends State<ProductPageBody> {
               ? ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: product.productList.length,
+                  itemCount: product.womenClothingList.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
@@ -125,8 +126,8 @@ class _ProductPageBodyState extends State<ProductPageBody> {
                                 color: Colors.white38,
                                 image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                        product.productList[index].image!)),
+                                    image: NetworkImage(product
+                                        .womenClothingList[index].image!)),
                               ),
                             ),
                             Expanded(
@@ -151,11 +152,11 @@ class _ProductPageBodyState extends State<ProductPageBody> {
                                     children: [
                                       BigText(
                                           text: product
-                                              .productList[index].title!),
+                                              .womenClothingList[index].title!),
                                       SizedBox(height: Dimensions.height10),
                                       SmallText(
-                                          text: product
-                                              .productList[index].category!),
+                                          text: product.womenClothingList[index]
+                                              .category!),
                                       SizedBox(height: Dimensions.height10),
                                       Row(
                                         mainAxisAlignment:

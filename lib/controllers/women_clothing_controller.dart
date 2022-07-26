@@ -6,8 +6,8 @@ import '../data/responsitory/women_clothing_repo.dart';
 class WomenClothingController extends GetxController {
   final WomenClothingRepo womenClothingRepo;
   WomenClothingController({required this.womenClothingRepo});
-  List<Product> _productList = [];
-  List<Product> get productList => _productList;
+  List<Product> _womenClothingList = [];
+  List<Product> get womenClothingList => _womenClothingList;
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
 
@@ -16,9 +16,9 @@ class WomenClothingController extends GetxController {
     if (response.statusCode == 200) {
       print('got women clothing');
       List<dynamic> result = jsonDecode(jsonEncode(response.body));
-      _productList = [];
+      _womenClothingList = [];
       for (var element in result) {
-        _productList.add(Product.fromJson(element));
+        _womenClothingList.add(Product.fromJson(element));
       }
       _isLoaded = true;
       update();
