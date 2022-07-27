@@ -79,17 +79,16 @@ class Cartpage extends StatelessWidget {
                                       Get.find<ElectronicsController>()
                                           .electronicsList
                                           .indexOf(_cartList[index].product!);
-                                  print(electronicsIndex);
                                   if (electronicsIndex >= 0) {
                                     Get.toNamed(RouteHelper.getElectronics(
-                                        electronicsIndex));
+                                        electronicsIndex, 'cartpage'));
                                   } else {
                                     var womenClothingIndex =
                                         Get.find<WomenClothingController>()
                                             .womenClothingList
                                             .indexOf(_cartList[index].product!);
                                     Get.toNamed(RouteHelper.getWomenClothing(
-                                        womenClothingIndex));
+                                        womenClothingIndex, "cartpage"));
                                   }
                                 },
                                 child: Container(
@@ -198,6 +197,67 @@ class Cartpage extends StatelessWidget {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: Container(
+        height: Dimensions.bottomHeightBar,
+        padding: EdgeInsets.only(
+          top: Dimensions.height20,
+          bottom: Dimensions.height20,
+          left: Dimensions.width20,
+          right: Dimensions.width20,
+        ),
+        decoration: BoxDecoration(
+          color: AppColors.buttonBackgroundColor,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(Dimensions.radius20 * 2),
+            topRight: Radius.circular(Dimensions.radius20 * 2),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            GetBuilder<CartController>(builder: (cartController) {
+              return Container(
+                padding: EdgeInsets.only(
+                  top: Dimensions.height20,
+                  bottom: Dimensions.height20,
+                  left: Dimensions.width20,
+                  right: Dimensions.width20,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimensions.radius20),
+                  color: Colors.white,
+                ),
+                child: Row(
+                  children: [
+                    SizedBox(width: Dimensions.width10 / 2),
+                    BigText(
+                        text: "\$ " + cartController.totalAmount.toString()),
+                    SizedBox(width: Dimensions.width10 / 2),
+                  ],
+                ),
+              );
+            }),
+            GetBuilder<CartController>(builder: (cartController) {
+              return Container(
+                padding: EdgeInsets.only(
+                  top: Dimensions.height20,
+                  bottom: Dimensions.height20,
+                  left: Dimensions.width20,
+                  right: Dimensions.width20,
+                ),
+                child: GestureDetector(
+                  onTap: () {},
+                  child: BigText(text: 'Check out', color: Colors.white),
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimensions.radius20),
+                  color: AppColors.mainColor,
+                ),
+              );
+            })
+          ],
+        ),
       ),
     );
   }

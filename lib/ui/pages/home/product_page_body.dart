@@ -108,7 +108,8 @@ class _ProductPageBodyState extends State<ProductPageBody> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        Get.toNamed(RouteHelper.getWomenClothing(index));
+                        Get.toNamed(
+                            RouteHelper.getWomenClothing(index, 'home'));
                       },
                       child: Container(
                         margin: EdgeInsets.only(
@@ -227,7 +228,7 @@ class _ProductPageBodyState extends State<ProductPageBody> {
         children: [
           GestureDetector(
             onTap: () {
-              Get.toNamed(RouteHelper.getElectronics(index));
+              Get.toNamed(RouteHelper.getElectronics(index, "home"));
             },
             child: Container(
               height: Dimensions.pageViewContainer,

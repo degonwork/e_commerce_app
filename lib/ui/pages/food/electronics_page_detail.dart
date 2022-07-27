@@ -1,7 +1,6 @@
 import 'package:e_commerce_app_getx/controllers/cart_controller.dart';
 import 'package:e_commerce_app_getx/controllers/electronics_controller.dart';
 import 'package:e_commerce_app_getx/routes/route_helper.dart';
-import 'package:e_commerce_app_getx/ui/pages/home/main_product_page.dart';
 import 'package:flutter/material.dart';
 import '../../utils/colors.dart';
 import '../../utils/dimension.dart';
@@ -15,8 +14,10 @@ class ElectronicsPageDetail extends StatelessWidget {
   const ElectronicsPageDetail({
     Key? key,
     required this.pageId,
+    required this.page,
   }) : super(key: key);
   final int? pageId;
+  final String page;
   @override
   Widget build(BuildContext context) {
     var product = Get.find<ElectronicsController>().electronicsList[pageId!];
@@ -49,7 +50,11 @@ class ElectronicsPageDetail extends StatelessWidget {
               children: [
                 GestureDetector(
                     onTap: () {
-                      Get.to(() => MainProductPage());
+                      if (page == 'cartpage') {
+                        Get.toNamed(RouteHelper.getcart());
+                      } else {
+                        Get.toNamed(RouteHelper.getInitial());
+                      }
                     },
                     child: AppIcon(icon: Icons.arrow_back_ios)),
                 GetBuilder<ElectronicsController>(

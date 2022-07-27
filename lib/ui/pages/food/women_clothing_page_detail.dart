@@ -1,7 +1,6 @@
 import 'package:e_commerce_app_getx/controllers/electronics_controller.dart';
 import 'package:e_commerce_app_getx/controllers/women_clothing_controller.dart';
 import 'package:e_commerce_app_getx/routes/route_helper.dart';
-import 'package:e_commerce_app_getx/ui/pages/cart/cart_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controllers/cart_controller.dart';
@@ -12,9 +11,11 @@ import '../widgets/big_text.dart';
 import '../widgets/expandable_text_widget.dart';
 
 class WomenClothingPageDetail extends StatelessWidget {
-  const WomenClothingPageDetail({Key? key, required this.pageId})
+  const WomenClothingPageDetail(
+      {Key? key, required this.pageId, required this.page})
       : super(key: key);
   final int? pageId;
+  final String page;
   @override
   Widget build(BuildContext context) {
     var product =
@@ -33,7 +34,11 @@ class WomenClothingPageDetail extends StatelessWidget {
                 children: [
                   GestureDetector(
                       onTap: () {
-                        Get.toNamed(RouteHelper.getInitial());
+                        if (page == 'cartpage') {
+                          Get.toNamed(RouteHelper.getcart());
+                        } else {
+                          Get.toNamed(RouteHelper.getInitial());
+                        }
                       },
                       child: AppIcon(icon: Icons.clear)),
                   GetBuilder<ElectronicsController>(

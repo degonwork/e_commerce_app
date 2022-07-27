@@ -1,21 +1,14 @@
 import 'package:e_commerce_app_getx/ui/pages/home/product_page_body.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../../controllers/electronics_controller.dart';
-import '../../../controllers/women_clothing_controller.dart';
+
 import '../../utils/colors.dart';
 import '../../utils/dimension.dart';
 import '../widgets/big_text.dart';
 import '../widgets/small_text.dart';
 
-class MainProductPage extends StatefulWidget {
-  const MainProductPage({Key? key}) : super(key: key);
+class MainFoodPage extends StatelessWidget {
+  const MainFoodPage({Key? key}) : super(key: key);
 
-  @override
-  State<MainProductPage> createState() => _MainProductPageState();
-}
-
-class _MainProductPageState extends State<MainProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
