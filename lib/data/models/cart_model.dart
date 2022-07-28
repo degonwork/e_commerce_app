@@ -36,21 +36,16 @@ class Cart {
     );
   }
 
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = new Map<String, dynamic>();
-//     data['id'] = this.id;
-//     data['title'] = this.title; Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = new Map<String, dynamic>();
-//     data['id'] = this.id;
-//     data['title'] = this.title;
-//     data['price'] = this.price;
-//     data['description'] = this.description;
-//     data['category'] = this.category;
-//     data['image'] = this.image;
-//     if (this.rating != null) {
-//       data['rating'] = this.rating!.toJson();
-//     }
-//     return data;
-//   }
-// }
+  Map<String, dynamic> toJson() {
+    return {
+      'id': this.id,
+      'title': this.title,
+      'price': this.price,
+      'image': this.image,
+      'quantity': this.quantity,
+      'isExit': this.isExit,
+      'time': this.time,
+      'product': this.product!.toJson(),
+    };
+  }
 }

@@ -8,4 +8,5 @@ class AppConstants {
       "/products/category/women's clothing";
 
   static const String TOKEN = "DBtoken";
+  static const String CART_LIST = "Cart-list";
 }

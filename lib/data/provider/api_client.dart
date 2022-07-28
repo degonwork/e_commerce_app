@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 import '../../ui/utils/app_constants.dart';
 
 class ApiClient extends GetConnect implements GetxService {

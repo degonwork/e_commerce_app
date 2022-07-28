@@ -8,8 +8,8 @@ import '../data/models/cart_model.dart';
 import '../data/models/product_model.dart';
 
 class ElectronicsController extends GetxController {
-  final ElectronicsRepo elctronicsRepo;
-  ElectronicsController({required this.elctronicsRepo});
+  final ElectronicsRepo electronicsRepo;
+  ElectronicsController({required this.electronicsRepo});
   List<Product> _electronicsList = [];
   List<Product> get electronicsList => _electronicsList;
   bool _isLoaded = false;
@@ -21,7 +21,7 @@ class ElectronicsController extends GetxController {
   late CartController _cart;
 
   Future<void> getElectronicsList() async {
-    Response response = await elctronicsRepo.getElectronicsList();
+    Response response = await electronicsRepo.getElectronicsList();
     if (response.statusCode == 200) {
       print('got electronics');
       List<dynamic> result = jsonDecode(jsonEncode(response.body));

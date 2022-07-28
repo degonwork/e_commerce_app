@@ -1,17 +1,19 @@
 import 'package:e_commerce_app_getx/ui/pages/cart/cart_page.dart';
 import 'package:e_commerce_app_getx/ui/pages/food/electronics_page_detail.dart';
 import 'package:e_commerce_app_getx/ui/pages/home/home_page.dart';
-import 'package:e_commerce_app_getx/ui/pages/home/main_product_page.dart';
+import 'package:e_commerce_app_getx/ui/pages/splash/splash_page.dart';
 import 'package:get/get.dart';
 import '../ui/pages/food/women_clothing_page_detail.dart';
 
 class RouteHelper {
   static const String initial = '/';
+  static const String splash = '/splash';
   static const String electronics = '/electronics';
   static const String womenClothing = '/womenClothing';
   static const String cart = '/cart';
 
   static String getInitial() => '$initial';
+  static String getSplash() => '$splash';
   static String getElectronics(int pageId, String page) =>
       '$electronics?pageId=$pageId&page=$page';
   static String getWomenClothing(int pageId, String page) =>
@@ -20,6 +22,7 @@ class RouteHelper {
 
   static List<GetPage> routes = [
     GetPage(name: initial, page: () => HomePage()),
+    GetPage(name: splash, page: () => SplashPage()),
     GetPage(
         name: electronics,
         page: () {

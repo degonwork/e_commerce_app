@@ -46,4 +46,7 @@ class Dimensions {
 
   // navigator
   static double bottomHeightBar = screenHeight / 6.697;
+
+  // SplashImg
+  static double splashImg = screenHeight / 3.21;
 }

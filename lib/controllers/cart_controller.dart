@@ -11,6 +11,7 @@ class CartController extends GetxController {
 
   Map<int, Cart> _items = {};
   Map<int, Cart> get items => _items;
+  List<Cart> storageItem = [];
 
   void addItem(Product product, int quantity) {
     num totalQuantity = 0;
@@ -54,6 +55,7 @@ class CartController extends GetxController {
         );
       }
     }
+    cartRepo.addToCartList(getItems);
     update();
   }
 
@@ -97,5 +99,14 @@ class CartController extends GetxController {
       total += value.quantity! * value.price!;
     });
     return total;
+  }
+
+  List<Cart> getCartData() {
+    setCart = cartRepo.getCartList();
+    return storageItem;
+  }
+
+  set setCart(List<Cart> items) {
+    storageItem = items;
   }
 }
