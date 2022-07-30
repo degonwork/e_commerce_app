@@ -63,6 +63,10 @@ class ElectronicsPageDetail extends StatelessWidget {
                     onTap: () {
                       if (electronicsController.totalItems >= 1) {
                         Get.toNamed(RouteHelper.getcart());
+                      } else {
+                        Get.snackbar("Don't go", "Your cart is empty",
+                            colorText: Colors.white,
+                            backgroundColor: AppColors.mainColor);
                       }
                     },
                     child: Stack(

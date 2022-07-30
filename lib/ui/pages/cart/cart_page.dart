@@ -232,7 +232,8 @@ class Cartpage extends StatelessWidget {
                   children: [
                     SizedBox(width: Dimensions.width10 / 2),
                     BigText(
-                        text: "\$ " + cartController.totalAmount.toString()),
+                        text: "\$ " +
+                            cartController.totalAmount.toStringAsFixed(2)),
                     SizedBox(width: Dimensions.width10 / 2),
                   ],
                 ),
@@ -247,7 +248,9 @@ class Cartpage extends StatelessWidget {
                   right: Dimensions.width20,
                 ),
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    cartController.addToHistory();
+                  },
                   child: BigText(text: 'Check out', color: Colors.white),
                 ),
                 decoration: BoxDecoration(

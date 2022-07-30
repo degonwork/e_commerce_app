@@ -1,3 +1,4 @@
+import 'package:e_commerce_app_getx/controllers/cart_controller.dart';
 import 'package:e_commerce_app_getx/controllers/electronics_controller.dart';
 import 'package:e_commerce_app_getx/controllers/women_clothing_controller.dart';
 import 'package:e_commerce_app_getx/routes/route_helper.dart';
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.find<CartController>().getCartData();
     return GetBuilder<ElectronicsController>(builder: ((_) {
       return GetBuilder<WomenClothingController>(builder: (_) {
         return GetMaterialApp(
