@@ -35,9 +35,9 @@ class WomenClothingPageDetail extends StatelessWidget {
                   GestureDetector(
                       onTap: () {
                         if (page == 'cartpage') {
-                          Get.toNamed(RouteHelper.getcart());
+                          Get.toNamed(RouteHelper.getcartPage());
                         } else {
-                          Get.toNamed(RouteHelper.getInitial());
+                          Get.toNamed(RouteHelper.getInitialPage());
                         }
                       },
                       child: AppIcon(icon: Icons.clear)),
@@ -45,13 +45,7 @@ class WomenClothingPageDetail extends StatelessWidget {
                       builder: (electronicsController) {
                     return GestureDetector(
                       onTap: () {
-                        if (electronicsController.totalItems >= 1) {
-                          Get.toNamed(RouteHelper.getcart());
-                        } else {
-                          Get.snackbar("Don't go", "Your cart is empty",
-                              colorText: Colors.white,
-                              backgroundColor: AppColors.mainColor);
-                        }
+                        Get.toNamed(RouteHelper.getcartPage());
                       },
                       child: Stack(
                         children: [

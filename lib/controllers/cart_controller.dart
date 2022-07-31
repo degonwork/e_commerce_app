@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:e_commerce_app_getx/data/models/product_model.dart';
 import 'package:e_commerce_app_getx/data/responsitory/cart_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../data/models/cart_model.dart';
 import '../ui/utils/colors.dart';
 
@@ -12,8 +15,6 @@ class CartController extends GetxController {
   Map<int, Cart> _items = {};
   Map<int, Cart> get items => _items;
   List<Cart> storageItem = [];
-  List<int> itemsPerOrder = [];
-  int listCounter = 0;
 
   void addItem(Product product, int quantity) {
     num totalQuantity = 0;
@@ -120,32 +121,68 @@ class CartController extends GetxController {
     clear();
   }
 
-  void clear() {
-    _items = {};
-    update();
-  }
-
-  List<Cart> getCartHistoryList() => cartRepo.getCartHistoryList();
-
-  void getCartItemsPerOrder() {
+  Map<String, int> getcartItemsPerOrder() {
     Map<String, int> cartItemsPerOrder = Map();
 
     for (int i = 0; i < getCartHistoryList().length; i++) {
-      if (cartItemsPerOrder
-          .containsKey(cartRepo.getCartHistoryList()[i].time)) {
+      if (cartItemsPerOrder.containsKey(getCartHistoryList()[i].time)) {
         cartItemsPerOrder.update(
             getCartHistoryList()[i].time!, (value) => ++value);
       } else {
         cartItemsPerOrder.putIfAbsent(getCartHistoryList()[i].time!, () => 1);
       }
     }
-    print(cartItemsPerOrder);
+    return cartItemsPerOrder;
+  }
 
-    List<int> cartOrderTimeToList() {
-      return cartItemsPerOrder.entries.map((e) => e.value).toList();
+  List<int> cartItemsPerOrderToList() {
+    return getcartItemsPerOrder().entries.map((e) => e.value).toList();
+  }
+
+  List<String> cartOrderTimeToList() {
+    return getcartItemsPerOrder().entries.map((e) => e.key).toList();
+  }
+
+  void clear() {
+    _items = {};
+    update();
+  }
+
+  List<Cart> getCartHistoryList() {
+    return cartRepo.getCartHistoryList().toList();
+  }
+
+  void getMoreOrder(int index) {
+    var orderTime = cartOrderTimeToList();
+    Map<int, Cart> moreOrder = {};
+    for (int j = 0; j < getCartHistoryList().length; j++) {
+      if (getCartHistoryList()[j].time == orderTime[index]) {
+        moreOrder.putIfAbsent(
+            getCartHistoryList()[j].id!,
+            () =>
+                Cart.fromJson(jsonDecode(jsonEncode(getCartHistoryList()[j]))));
+      }
     }
+    setItems = moreOrder;
+    addToCartList();
+  }
 
-    itemsPerOrder = cartOrderTimeToList();
-    listCounter = 0;
+  set setItems(Map<int, Cart> setItems) {
+    _items = {};
+    _items = setItems;
+  }
+
+  void addToCartList() {
+    cartRepo.addToCartList(getItems);
+    update();
+  }
+
+  String getDateTime(listCounter) {
+    DateTime parseDate = DateFormat("yyyy-MM-dd HH:mm:ss")
+        .parse(getCartHistoryList()[listCounter].time.toString());
+    var inputDate = DateTime.parse(parseDate.toString());
+    var outPutFormat = DateFormat("MM/dd/yyyy hh:mm a");
+    var outPutDate = outPutFormat.format(inputDate);
+    return outPutDate;
   }
 }

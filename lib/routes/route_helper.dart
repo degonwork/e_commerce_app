@@ -12,13 +12,13 @@ class RouteHelper {
   static const String womenClothing = '/womenClothing';
   static const String cart = '/cart';
 
-  static String getInitial() => '$initial';
-  static String getSplash() => '$splash';
-  static String getElectronics(int pageId, String page) =>
+  static String getInitialPage() => '$initial';
+  static String getSplashPage() => '$splash';
+  static String getElectronicsPage(int pageId, String page) =>
       '$electronics?pageId=$pageId&page=$page';
-  static String getWomenClothing(int pageId, String page) =>
+  static String getWomenClothingPage(int pageId, String page) =>
       '$womenClothing?pageId=$pageId&page=$page';
-  static String getcart() => '$cart';
+  static String getcartPage() => '$cart';
 
   static List<GetPage> routes = [
     GetPage(name: initial, page: () => HomePage()),
