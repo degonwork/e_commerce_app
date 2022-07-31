@@ -178,11 +178,14 @@ class CartController extends GetxController {
   }
 
   String getDateTime(listCounter) {
-    DateTime parseDate = DateFormat("yyyy-MM-dd HH:mm:ss")
-        .parse(getCartHistoryList()[listCounter].time.toString());
-    var inputDate = DateTime.parse(parseDate.toString());
-    var outPutFormat = DateFormat("MM/dd/yyyy hh:mm a");
-    var outPutDate = outPutFormat.format(inputDate);
+    var outPutDate = DateTime.now().toString();
+    if (listCounter < getCartHistoryList().length) {
+      DateTime parseDate = DateFormat("yyyy-MM-dd HH:mm:ss")
+          .parse(getCartHistoryList()[listCounter].time.toString());
+      var inputDate = DateTime.parse(parseDate.toString());
+      var outPutFormat = DateFormat("MM/dd/yyyy hh:mm a");
+      outPutDate = outPutFormat.format(inputDate);
+    }
     return outPutDate;
   }
 }
