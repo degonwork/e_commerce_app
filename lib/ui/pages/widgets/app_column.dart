@@ -9,7 +9,7 @@ import '../../utils/dimension.dart';
 
 class AppColumn extends StatelessWidget {
   final String text;
-  final double ratingRate;
+  final num ratingRate;
   final int ratingCount;
 
   const AppColumn(

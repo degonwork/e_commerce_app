@@ -32,7 +32,8 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         AnimationController(vsync: this, duration: const Duration(seconds: 2))
           ..forward();
     animation = CurvedAnimation(parent: controller, curve: Curves.linear);
-    Timer(Duration(seconds: 3), () => Get.offNamed(RouteHelper.initial));
+    Timer(
+        Duration(seconds: 3), () => Get.offNamed(RouteHelper.getInitialPage()));
   }
 
   @override

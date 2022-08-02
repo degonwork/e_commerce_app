@@ -18,18 +18,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.find<CartController>().getCartData();
-    return GetBuilder<ElectronicsController>(builder: ((_) {
-      return GetBuilder<WomenClothingController>(builder: (_) {
-        return GetMaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
-          initialRoute: RouteHelper.getSplashPage(),
-          getPages: RouteHelper.routes,
+    return GetBuilder<ElectronicsController>(
+      builder: ((_) {
+        return GetBuilder<WomenClothingController>(
+          builder: (_) {
+            return GetMaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Flutter Demo',
+              theme: ThemeData(
+                primarySwatch: Colors.blue,
+              ),
+              initialRoute: RouteHelper.getSignInPage(),
+              getPages: RouteHelper.routes,
+            );
+          },
         );
-      });
-    }));
+      }),
+    );
   }
 }

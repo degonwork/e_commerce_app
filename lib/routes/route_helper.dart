@@ -2,11 +2,15 @@ import 'package:e_commerce_app_getx/ui/pages/cart/cart_page.dart';
 import 'package:e_commerce_app_getx/ui/pages/food/electronics_page_detail.dart';
 import 'package:e_commerce_app_getx/ui/pages/home/home_page.dart';
 import 'package:e_commerce_app_getx/ui/pages/splash/splash_page.dart';
-import 'package:get/get.dart';
+import '../ui/pages/auth/sign_in_page.dart';
+import '../ui/pages/auth/sign_up_page.dart';
 import '../ui/pages/food/women_clothing_page_detail.dart';
+import 'package:get/get.dart';
 
 class RouteHelper {
   static const String initial = '/';
+  static const String signIn = '/signIn';
+  static const String signUp = '/signUp';
   static const String splash = '/splash';
   static const String electronics = '/electronics';
   static const String womenClothing = '/womenClothing';
@@ -14,6 +18,8 @@ class RouteHelper {
 
   static String getInitialPage() => '$initial';
   static String getSplashPage() => '$splash';
+  static String getSignInPage() => '$signIn';
+  static String getSignUpPage() => '$signUp';
   static String getElectronicsPage(int pageId, String page) =>
       '$electronics?pageId=$pageId&page=$page';
   static String getWomenClothingPage(int pageId, String page) =>
@@ -23,6 +29,10 @@ class RouteHelper {
   static List<GetPage> routes = [
     GetPage(name: initial, page: () => HomePage()),
     GetPage(name: splash, page: () => SplashPage()),
+    GetPage(
+        name: signIn, page: () => SignInPage(), transition: Transition.fade),
+    GetPage(
+        name: signUp, page: () => SignUpPage(), transition: Transition.fade),
     GetPage(
         name: electronics,
         page: () {

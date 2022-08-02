@@ -41,7 +41,7 @@ class Product {
 }
 
 class Rating {
-  final double rate;
+  final num rate;
   final int count;
 
   Rating({required this.rate, required this.count});
