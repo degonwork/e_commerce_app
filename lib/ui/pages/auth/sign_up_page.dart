@@ -6,6 +6,7 @@ import 'package:e_commerce_app_getx/data/responsitory/auth_repo.dart';
 import 'package:e_commerce_app_getx/routes/route_helper.dart';
 import 'package:e_commerce_app_getx/ui/pages/widgets/app_text_field.dart';
 import 'package:e_commerce_app_getx/ui/pages/widgets/big_text.dart';
+import 'package:e_commerce_app_getx/ui/pages/widgets/custom_loader.dart';
 import 'package:e_commerce_app_getx/ui/pages/widgets/show_custom_snackbar.dart';
 import 'package:e_commerce_app_getx/ui/utils/colors.dart';
 import 'package:e_commerce_app_getx/ui/utils/dimension.dart';
@@ -27,8 +28,7 @@ class SignUpPage extends StatelessWidget {
       'assets/image/f.png',
       'assets/image/g.png',
     ];
-    void _registration() {
-      var authController = Get.find<AuthController>();
+    void _registration(AuthController authController) {
       String username = userNameController.text.trim();
       String phone = phoneController.text.trim();
       String email = emailController.text.trim();
@@ -86,103 +86,113 @@ class SignUpPage extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            SizedBox(height: Dimensions.screenHeight * 0.05),
-            Container(
-              height: Dimensions.screenHeight * 0.25,
-              child: Center(
-                child: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  radius: Dimensions.width20 * 4,
-                  backgroundImage: AssetImage('assets/image/logo part 1.png'),
-                ),
-              ),
-            ),
-            AppTextField(
-              textEditingController: emailController,
-              hinText: "Email",
-              iconData: Icons.email,
-            ),
-            SizedBox(height: Dimensions.height20),
-            AppTextField(
-              textEditingController: passwordController,
-              hinText: "Password",
-              iconData: Icons.password_sharp,
-            ),
-            SizedBox(height: Dimensions.height20),
-            AppTextField(
-              textEditingController: userNameController,
-              hinText: "User Name",
-              iconData: Icons.person,
-            ),
-            SizedBox(height: Dimensions.height20),
-            AppTextField(
-              textEditingController: phoneController,
-              hinText: "Phone",
-              iconData: Icons.phone,
-            ),
-            SizedBox(height: Dimensions.height20),
-            GestureDetector(
-              onTap: _registration,
-              child: Container(
-                width: Dimensions.screenWidth / 2,
-                height: Dimensions.screenHeight / 13,
-                decoration: BoxDecoration(
-                  color: AppColors.mainColor,
-                  borderRadius: BorderRadius.circular(Dimensions.radius30),
-                ),
-                child: Center(
-                  child: BigText(
-                    text: "Sign up",
-                    size: Dimensions.font20 + Dimensions.font20 / 2,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: Dimensions.height10),
-            RichText(
-              text: TextSpan(
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () => Get.toNamed(RouteHelper.signIn),
-                text: 'Have an account already?',
-                style: TextStyle(
-                  color: Colors.grey[500],
-                  fontSize: Dimensions.font20,
-                ),
-              ),
-            ),
-            SizedBox(height: Dimensions.screenHeight * 0.05),
-            RichText(
-              text: TextSpan(
-                text: 'Sign up using one of the following methods',
-                style: TextStyle(
-                  color: Colors.grey[500],
-                  fontSize: Dimensions.font16,
-                ),
-              ),
-            ),
-            SizedBox(height: Dimensions.height10 / 2),
-            Wrap(
-              children: List.generate(
-                  3,
-                  (index) => Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CircleAvatar(
-                          radius: Dimensions.radius30,
-                          backgroundImage: AssetImage(
-                            signUpIcon[index],
+        backgroundColor: Colors.white,
+        body: GetBuilder<AuthController>(
+          builder: (authController) {
+            return !authController.isLoading
+                ? SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
+                    child: Column(
+                      children: [
+                        SizedBox(height: Dimensions.screenHeight * 0.05),
+                        Container(
+                          height: Dimensions.screenHeight * 0.25,
+                          child: Center(
+                            child: CircleAvatar(
+                              backgroundColor: Colors.white,
+                              radius: Dimensions.width20 * 4,
+                              backgroundImage:
+                                  AssetImage('assets/image/logo part 1.png'),
+                            ),
                           ),
                         ),
-                      )),
-            )
-          ],
-        ),
-      ),
-    );
+                        AppTextField(
+                          textEditingController: emailController,
+                          hinText: "Email",
+                          iconData: Icons.email,
+                        ),
+                        SizedBox(height: Dimensions.height20),
+                        AppTextField(
+                          isObscure: true,
+                          textEditingController: passwordController,
+                          hinText: "Password",
+                          iconData: Icons.password_sharp,
+                        ),
+                        SizedBox(height: Dimensions.height20),
+                        AppTextField(
+                          textEditingController: userNameController,
+                          hinText: "User Name",
+                          iconData: Icons.person,
+                        ),
+                        SizedBox(height: Dimensions.height20),
+                        AppTextField(
+                          textEditingController: phoneController,
+                          hinText: "Phone",
+                          iconData: Icons.phone,
+                        ),
+                        SizedBox(height: Dimensions.height20),
+                        GestureDetector(
+                          onTap: () {
+                            _registration(authController);
+                          },
+                          child: Container(
+                            width: Dimensions.screenWidth / 2,
+                            height: Dimensions.screenHeight / 13,
+                            decoration: BoxDecoration(
+                              color: AppColors.mainColor,
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.radius30),
+                            ),
+                            child: Center(
+                              child: BigText(
+                                text: "Sign up",
+                                size: Dimensions.font20 + Dimensions.font20 / 2,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: Dimensions.height10),
+                        RichText(
+                          text: TextSpan(
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () => Get.toNamed(RouteHelper.signIn),
+                            text: 'Have an account already?',
+                            style: TextStyle(
+                              color: Colors.grey[500],
+                              fontSize: Dimensions.font20,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: Dimensions.screenHeight * 0.05),
+                        RichText(
+                          text: TextSpan(
+                            text: 'Sign up using one of the following methods',
+                            style: TextStyle(
+                              color: Colors.grey[500],
+                              fontSize: Dimensions.font16,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: Dimensions.height10 / 2),
+                        Wrap(
+                          children: List.generate(
+                              3,
+                              (index) => Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: CircleAvatar(
+                                      radius: Dimensions.radius30,
+                                      backgroundImage: AssetImage(
+                                        signUpIcon[index],
+                                      ),
+                                    ),
+                                  )),
+                        )
+                      ],
+                    ),
+                  )
+                : CustomLoader();
+          },
+        ));
   }
 }
