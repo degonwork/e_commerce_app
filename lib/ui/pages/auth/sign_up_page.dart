@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:e_commerce_app_getx/controllers/auth_controller.dart';
-import 'package:e_commerce_app_getx/data/models/signup_body_model.dart';
+import 'package:e_commerce_app_getx/data/models/user_model.dart';
 import 'package:e_commerce_app_getx/data/responsitory/auth_repo.dart';
 import 'package:e_commerce_app_getx/routes/route_helper.dart';
 import 'package:e_commerce_app_getx/ui/pages/widgets/app_text_field.dart';
@@ -70,7 +70,7 @@ class SignUpPage extends StatelessWidget {
           'name': nameMap,
           "address": addressMap,
         };
-        SignUpBody signUpBody = SignUpBody.fromJson(signUpBodyMap);
+        User signUpBody = User.fromJson(signUpBodyMap);
         showCustomSnackbar("All went well", title: "Perfect");
         authController.registration(signUpBody).then(
           (status) {

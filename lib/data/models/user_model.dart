@@ -1,5 +1,5 @@
-class SignUpBody {
-  SignUpBody({
+class User {
+  User({
     required this.id,
     required this.email,
     required this.username,
@@ -17,8 +17,8 @@ class SignUpBody {
   final Address? address;
   final String? phone;
 
-  factory SignUpBody.fromJson(Map<String, dynamic> json) {
-    return SignUpBody(
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
       id: json["id"],
       email: json["email"],
       username: json["username"],

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/electronics_controller.dart';
+import '../../../controllers/user_controller.dart';
 import '../../../controllers/women_clothing_controller.dart';
 
 class SplashPage extends StatefulWidget {
@@ -22,6 +23,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   Future<void> _loadResource() async {
     await Get.find<ElectronicsController>().getElectronicsList();
     await Get.find<WomenClothingController>().getWomenClothingList();
+    await Get.find<UserController>().getListUserInfo();
   }
 
   @override

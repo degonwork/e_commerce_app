@@ -1,16 +1,16 @@
 import 'package:e_commerce_app_getx/data/models/respone_model.dart';
 import 'package:e_commerce_app_getx/data/responsitory/auth_repo.dart';
 import 'package:get/get.dart';
-import '../data/models/signup_body_model.dart';
+import '../data/models/user_model.dart';
 
-class AuthController extends GetxController implements GetxService {
+class AuthController extends GetxController {
   final AuthRepo authRepo;
 
   AuthController({required this.authRepo});
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  Future<ResponseModel> registration(SignUpBody signUpBody) async {
+  Future<ResponseModel> registration(User signUpBody) async {
     _isLoading = true;
     update();
     Response response = await authRepo.registration(signUpBody);
@@ -33,6 +33,7 @@ class AuthController extends GetxController implements GetxService {
     late ResponseModel responseModel;
     if (response.statusCode == 200) {
       authRepo.saveUserToken(response.body['token']);
+      saveUserNameAndPassword(username, password);
       responseModel = ResponseModel(true, response.body['token']);
     } else {
       responseModel = ResponseModel(false, response.statusText!);
@@ -42,8 +43,8 @@ class AuthController extends GetxController implements GetxService {
     return responseModel;
   }
 
-  void saveUserNumberAndPassword(String number, String password) {
-    authRepo.saveUserNumberAndPassword(number, password);
+  void saveUserNameAndPassword(String username, String password) {
+    authRepo.saveUserNameAndPassword(username, password);
   }
 
   bool userLoggedIn() {

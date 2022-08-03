@@ -1,5 +1,6 @@
 import 'package:e_commerce_app_getx/controllers/cart_controller.dart';
 import 'package:e_commerce_app_getx/controllers/electronics_controller.dart';
+import 'package:e_commerce_app_getx/controllers/user_controller.dart';
 import 'package:e_commerce_app_getx/controllers/women_clothing_controller.dart';
 import 'package:e_commerce_app_getx/routes/route_helper.dart';
 import 'package:flutter/material.dart';
@@ -22,15 +23,17 @@ class MyApp extends StatelessWidget {
       builder: ((_) {
         return GetBuilder<WomenClothingController>(
           builder: (_) {
-            return GetMaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: 'Flutter Demo',
-              theme: ThemeData(
-                primarySwatch: Colors.blue,
-              ),
-              initialRoute: RouteHelper.getSplashPage(),
-              getPages: RouteHelper.routes,
-            );
+            return GetBuilder<UserController>(builder: (_) {
+              return GetMaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: 'Flutter Demo',
+                theme: ThemeData(
+                  primarySwatch: Colors.blue,
+                ),
+                initialRoute: RouteHelper.getSplashPage(),
+                getPages: RouteHelper.routes,
+              );
+            });
           },
         );
       }),

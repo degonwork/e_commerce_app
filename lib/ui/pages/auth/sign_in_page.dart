@@ -31,10 +31,6 @@ class SignInPage extends StatelessWidget {
         showCustomSnackbar("Password can't be less than six characters",
             title: "Password");
       } else {
-        Map<String, dynamic> signUpBodyMap = {
-          "username": username,
-          "password": password,
-        };
         showCustomSnackbar("All went well", title: "Perfect");
         authController.login(username, password).then(
           (status) {

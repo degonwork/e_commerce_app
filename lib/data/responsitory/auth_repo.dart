@@ -1,4 +1,4 @@
-import 'package:e_commerce_app_getx/data/models/signup_body_model.dart';
+import 'package:e_commerce_app_getx/data/models/user_model.dart';
 import 'package:e_commerce_app_getx/data/provider/api_client.dart';
 import 'package:e_commerce_app_getx/ui/utils/app_constants.dart';
 import 'package:get/get.dart';
@@ -13,9 +13,8 @@ class AuthRepo {
     required this.sharedPreferences,
   });
 
-  Future<Response> registration(SignUpBody signUpBody) async {
-    return await apiClient.postData(
-        AppConstants.REGISTRATION_URL, signUpBody.toJson());
+  Future<Response> registration(User signUpBody) async {
+    return await apiClient.postData(AppConstants.USER_URL, signUpBody.toJson());
   }
 
   Future<Response> login(String username, String password) async {
@@ -37,13 +36,13 @@ class AuthRepo {
     return sharedPreferences.containsKey(AppConstants.TOKEN);
   }
 
-  Future<String> getUserToken() async {
-    return await sharedPreferences.getString(AppConstants.TOKEN) ?? "None";
+  String getUserToken() {
+    return sharedPreferences.getString(AppConstants.TOKEN) ?? "None";
   }
 
-  Future<void> saveUserNumberAndPassword(String number, String password) async {
+  Future<void> saveUserNameAndPassword(String username, String password) async {
     try {
-      await sharedPreferences.setString(AppConstants.PHONE, number);
+      await sharedPreferences.setString(AppConstants.USERNAME, username);
       await sharedPreferences.setString(AppConstants.PASSWORD, password);
     } catch (e) {
       throw e;
@@ -52,7 +51,7 @@ class AuthRepo {
 
   bool clearSharedData() {
     sharedPreferences.remove(AppConstants.TOKEN);
-    sharedPreferences.remove(AppConstants.PHONE);
+    sharedPreferences.remove(AppConstants.USERNAME);
     sharedPreferences.remove(AppConstants.PASSWORD);
     apiClient.token = '';
     apiClient.updateHeader('');

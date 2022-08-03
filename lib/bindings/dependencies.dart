@@ -1,7 +1,9 @@
 import 'package:e_commerce_app_getx/controllers/auth_controller.dart';
 import 'package:e_commerce_app_getx/controllers/electronics_controller.dart';
+import 'package:e_commerce_app_getx/controllers/user_controller.dart';
 import 'package:e_commerce_app_getx/data/responsitory/auth_repo.dart';
 import 'package:e_commerce_app_getx/data/responsitory/electronics_repo.dart';
+import 'package:e_commerce_app_getx/data/responsitory/user_repo.dart';
 import 'package:e_commerce_app_getx/data/responsitory/women_clothing_repo.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,6 +22,8 @@ Future<void> init() async {
   Get.lazyPut(() => ApiClient(appBaseUrl: AppConstants.BASE_URL));
 
   // repo
+  Get.lazyPut(
+      () => UserRepo(apiClient: Get.find(), sharedPreferences: Get.find()));
   Get.lazyPut(() => AuthRepo(
         apiClient: Get.find(),
         sharedPreferences: Get.find(),
@@ -29,6 +33,7 @@ Future<void> init() async {
   Get.lazyPut(() => CartRepo(sharedPreferences: Get.find()));
 
   // controller
+  Get.lazyPut(() => UserController(userRepo: Get.find()));
   Get.lazyPut(() => AuthController(authRepo: Get.find()));
   Get.lazyPut(() => ElectronicsController(electronicsRepo: Get.find()));
   Get.lazyPut(() => WomenClothingController(womenClothingRepo: Get.find()));

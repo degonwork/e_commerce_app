@@ -1,3 +1,4 @@
+import 'package:e_commerce_app_getx/controllers/user_controller.dart';
 import 'package:e_commerce_app_getx/ui/pages/home/product_page_body.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,6 +21,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
   Future<void> _loadResource() async {
     await Get.find<ElectronicsController>().getElectronicsList();
     await Get.find<WomenClothingController>().getWomenClothingList();
+    await Get.find<UserController>().getListUserInfo();
   }
 
   @override

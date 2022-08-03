@@ -12,13 +12,13 @@ class AppConstants {
       "/products/category/women's clothing";
 
   // Authenticate
-  static const String REGISTRATION_URL = "/users";
+  static const String USER_URL = "/users";
   static const String LOGIN_URL = "/auth/login";
 
   // Token and routes
   static const String TOKEN = "DBtoken";
   static const String IDUSER = "Id-user";
-  static const String PHONE = "Phone";
+  static const String USERNAME = "Username";
   static const String PASSWORD = "Password";
 
   static const String CART_LIST = "Cart-list";
