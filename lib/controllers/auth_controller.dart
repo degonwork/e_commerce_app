@@ -27,8 +27,6 @@ class AuthController extends GetxController implements GetxService {
   }
 
   Future<ResponseModel> login(String username, String password) async {
-    print("Getting token");
-    print(authRepo.getUserToken());
     _isLoading = true;
     update();
     Response response = await authRepo.login(username, password);
@@ -46,5 +44,13 @@ class AuthController extends GetxController implements GetxService {
 
   void saveUserNumberAndPassword(String number, String password) {
     authRepo.saveUserNumberAndPassword(number, password);
+  }
+
+  bool userLoggedIn() {
+    return authRepo.userLoggedIn();
+  }
+
+  bool clearSharedData() {
+    return authRepo.clearSharedData();
   }
 }

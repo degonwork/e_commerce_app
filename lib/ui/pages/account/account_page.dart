@@ -1,9 +1,14 @@
+import 'package:e_commerce_app_getx/controllers/auth_controller.dart';
+import 'package:e_commerce_app_getx/controllers/cart_controller.dart';
+import 'package:e_commerce_app_getx/routes/route_helper.dart';
 import 'package:e_commerce_app_getx/ui/pages/widgets/account_widget.dart';
 import 'package:e_commerce_app_getx/ui/pages/widgets/app_icon.dart';
 import 'package:e_commerce_app_getx/ui/pages/widgets/big_text.dart';
+import 'package:e_commerce_app_getx/ui/pages/widgets/show_custom_snackbar.dart';
 import 'package:e_commerce_app_getx/ui/utils/colors.dart';
 import 'package:e_commerce_app_getx/ui/utils/dimension.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({Key? key}) : super(key: key);
@@ -105,6 +110,31 @@ class AccountPage extends StatelessWidget {
                       ),
                       bigText: BigText(
                         text: "Message",
+                      ),
+                    ),
+                    SizedBox(height: Dimensions.height20),
+                    GestureDetector(
+                      onTap: () {
+                        if (Get.find<AuthController>().userLoggedIn()) {
+                          Get.find<AuthController>().clearSharedData();
+                          Get.find<CartController>().clear();
+                          Get.find<CartController>().clearCarthistory();
+                          Get.offNamed(RouteHelper.getSignInPage());
+                        } else {
+                          showCustomSnackbar('You logged out');
+                        }
+                      },
+                      child: AccountWidget(
+                        appIcon: AppIcon(
+                          icon: Icons.logout,
+                          backgroundColor: Colors.redAccent,
+                          iconColor: Colors.white,
+                          iconSize: Dimensions.height10 * 5 / 2,
+                          size: Dimensions.height10 * 5,
+                        ),
+                        bigText: BigText(
+                          text: "Logout",
+                        ),
                       ),
                     ),
                     SizedBox(height: Dimensions.height20),

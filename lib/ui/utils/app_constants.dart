@@ -18,8 +18,8 @@ class AppConstants {
   // Token and routes
   static const String TOKEN = "DBtoken";
   static const String IDUSER = "Id-user";
-  static const String PHONE = "";
-  static const String PASSWORD = "";
+  static const String PHONE = "Phone";
+  static const String PASSWORD = "Password";
 
   static const String CART_LIST = "Cart-list";
   static const String CART_HISTORY_LIST = "Cart-history-list";

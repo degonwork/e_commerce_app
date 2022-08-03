@@ -1,3 +1,4 @@
+import 'package:e_commerce_app_getx/controllers/auth_controller.dart';
 import 'package:e_commerce_app_getx/controllers/cart_controller.dart';
 import 'package:e_commerce_app_getx/controllers/electronics_controller.dart';
 import 'package:e_commerce_app_getx/controllers/women_clothing_controller.dart';
@@ -290,7 +291,11 @@ class Cartpage extends StatelessWidget {
                             ),
                             child: GestureDetector(
                               onTap: () {
-                                cartController.addToHistory();
+                                if (Get.find<AuthController>().userLoggedIn()) {
+                                  cartController.addToHistory();
+                                } else {
+                                  Get.toNamed(RouteHelper.getSignInPage());
+                                }
                               },
                               child: BigText(
                                   text: 'Check out', color: Colors.white),

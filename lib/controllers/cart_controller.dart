@@ -177,6 +177,11 @@ class CartController extends GetxController {
     update();
   }
 
+  void clearCarthistory() {
+    cartRepo.clearCartHistory();
+    update();
+  }
+
   String getDateTime(listCounter) {
     var outPutDate = DateTime.now().toString();
     if (listCounter < getCartHistoryList().length) {
