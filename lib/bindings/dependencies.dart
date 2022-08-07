@@ -21,6 +21,8 @@ Future<void> init() async {
   // shared preference
   final sharedPreference = await SharedPreferences.getInstance();
   Get.lazyPut(() => sharedPreference);
+
+  // dio
   final Dio dio = Dio();
   Get.lazyPut(() => dio);
 
