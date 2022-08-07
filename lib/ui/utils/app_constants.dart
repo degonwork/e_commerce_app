@@ -5,6 +5,8 @@ class AppConstants {
 
   // Base url
   static const String BASE_URL = 'https://fakestoreapi.com';
+  static const String BASE_GOOGLE_MAPS_URL =
+      'https://maps.googleapis.com/maps/api/directions/json?';
 
   // Product
   static const String ELECTRONICS_URL = "/products/category/electronics";
@@ -23,4 +25,11 @@ class AppConstants {
 
   static const String CART_LIST = "Cart-list";
   static const String CART_HISTORY_LIST = "Cart-history-list";
+
+  static String GEOCODE_URL = "";
+  static String USER_ADDRESS = "User-address";
+
+  // Api key google maps
+  static const String GOOGLE_API_KEY =
+      "AIzaSyAERKSFYMxdSR6mrMmgyesmQOr8miAFd4c";
 }

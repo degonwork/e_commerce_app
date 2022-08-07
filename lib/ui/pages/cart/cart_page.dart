@@ -1,6 +1,7 @@
 import 'package:e_commerce_app_getx/controllers/auth_controller.dart';
 import 'package:e_commerce_app_getx/controllers/cart_controller.dart';
 import 'package:e_commerce_app_getx/controllers/electronics_controller.dart';
+import 'package:e_commerce_app_getx/controllers/location_controller.dart';
 import 'package:e_commerce_app_getx/controllers/women_clothing_controller.dart';
 import 'package:e_commerce_app_getx/ui/pages/widgets/app_icon.dart';
 import 'package:e_commerce_app_getx/ui/pages/widgets/big_text.dart';
@@ -282,28 +283,33 @@ class Cartpage extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Container(
-                            padding: EdgeInsets.only(
-                              top: Dimensions.height20,
-                              bottom: Dimensions.height20,
-                              left: Dimensions.width20,
-                              right: Dimensions.width20,
-                            ),
-                            child: GestureDetector(
-                              onTap: () {
-                                if (Get.find<AuthController>().userLoggedIn()) {
-                                  cartController.addToHistory();
-                                } else {
-                                  Get.toNamed(RouteHelper.getSignInPage());
+                          GestureDetector(
+                            onTap: () {
+                              if (Get.find<AuthController>().userLoggedIn()) {
+                                if (Get.find<LocationController>()
+                                    .addressList
+                                    .isEmpty) {
+                                  print('Logged in');
+                                  Get.toNamed(RouteHelper.getAddAddressPage());
                                 }
-                              },
+                              } else {
+                                Get.toNamed(RouteHelper.getSignInPage());
+                              }
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                top: Dimensions.height20,
+                                bottom: Dimensions.height20,
+                                left: Dimensions.width20,
+                                right: Dimensions.width20,
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.radius20),
+                                color: AppColors.mainColor,
+                              ),
                               child: BigText(
                                   text: 'Check out', color: Colors.white),
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(Dimensions.radius20),
-                              color: AppColors.mainColor,
                             ),
                           )
                         ],

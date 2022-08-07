@@ -76,7 +76,7 @@ class SignUpPage extends StatelessWidget {
           (status) {
             if (status.isSuccess) {
               print("Success registration");
-              print(status.message);
+              Get.toNamed(RouteHelper.getInitialPage());
             } else {
               showCustomSnackbar(status.message);
             }

@@ -1,3 +1,4 @@
+import 'package:e_commerce_app_getx/ui/pages/address/add_address_page.dart';
 import 'package:e_commerce_app_getx/ui/pages/cart/cart_page.dart';
 import 'package:e_commerce_app_getx/ui/pages/food/electronics_page_detail.dart';
 import 'package:e_commerce_app_getx/ui/pages/home/home_page.dart';
@@ -15,6 +16,7 @@ class RouteHelper {
   static const String electronics = '/electronics';
   static const String womenClothing = '/womenClothing';
   static const String cart = '/cart';
+  static const String addAddress = '/add-address';
 
   static String getInitialPage() => '$initial';
   static String getSplashPage() => '$splash';
@@ -25,6 +27,7 @@ class RouteHelper {
   static String getWomenClothingPage(int pageId, String page) =>
       '$womenClothing?pageId=$pageId&page=$page';
   static String getcartPage() => '$cart';
+  static String getAddAddressPage() => '$addAddress';
 
   static List<GetPage> routes = [
     GetPage(name: initial, page: () => HomePage()),
@@ -54,6 +57,12 @@ class RouteHelper {
         name: cart,
         page: () {
           return Cartpage();
+        },
+        transition: Transition.fadeIn),
+    GetPage(
+        name: addAddress,
+        page: () {
+          return AddAddressPage();
         },
         transition: Transition.fadeIn),
   ];
