@@ -1,5 +1,6 @@
 import 'package:e_commerce_app_getx/controllers/auth_controller.dart';
 import 'package:e_commerce_app_getx/controllers/cart_controller.dart';
+import 'package:e_commerce_app_getx/controllers/location_controller.dart';
 import 'package:e_commerce_app_getx/controllers/user_controller.dart';
 import 'package:e_commerce_app_getx/routes/route_helper.dart';
 import 'package:e_commerce_app_getx/ui/pages/widgets/account_widget.dart';
@@ -96,18 +97,52 @@ class AccountPage extends StatelessWidget {
                                     ),
                                     SizedBox(height: Dimensions.height20),
                                     // Address
-                                    AccountWidget(
-                                      appIcon: AppIcon(
-                                        icon: Icons.location_on,
-                                        backgroundColor: AppColors.yellowColor,
-                                        iconColor: Colors.white,
-                                        iconSize: Dimensions.height10 * 5 / 2,
-                                        size: Dimensions.height10 * 5,
-                                      ),
-                                      bigText: BigText(
-                                          text: userController
-                                              .user!.address!.city!),
-                                    ),
+                                    GetBuilder<LocationController>(
+                                        builder: (locationController) {
+                                      if (userLoggedIn &&
+                                          locationController
+                                              .addressList.isEmpty) {
+                                        return GestureDetector(
+                                          onTap: () {
+                                            Get.offNamed(RouteHelper
+                                                .getAddAddressPage());
+                                          },
+                                          child: AccountWidget(
+                                            appIcon: AppIcon(
+                                              icon: Icons.location_on,
+                                              backgroundColor:
+                                                  AppColors.yellowColor,
+                                              iconColor: Colors.white,
+                                              iconSize:
+                                                  Dimensions.height10 * 5 / 2,
+                                              size: Dimensions.height10 * 5,
+                                            ),
+                                            bigText: BigText(
+                                                text: 'Fill in your address'),
+                                          ),
+                                        );
+                                      } else {
+                                        return GestureDetector(
+                                          onTap: () {
+                                            Get.offNamed(RouteHelper
+                                                .getAddAddressPage());
+                                          },
+                                          child: AccountWidget(
+                                            appIcon: AppIcon(
+                                              icon: Icons.location_on,
+                                              backgroundColor:
+                                                  AppColors.yellowColor,
+                                              iconColor: Colors.white,
+                                              iconSize:
+                                                  Dimensions.height10 * 5 / 2,
+                                              size: Dimensions.height10 * 5,
+                                            ),
+                                            bigText:
+                                                BigText(text: 'your address'),
+                                          ),
+                                        );
+                                      }
+                                    }),
                                     SizedBox(height: Dimensions.height20),
                                     // Message
                                     AccountWidget(

@@ -8,14 +8,29 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LocationRepo {
   final ApiGoogleMap apiGoogleMap;
   final SharedPreferences sharedPreferences;
-  LocationRepo({required this.apiGoogleMap, required this.sharedPreferences});
+  final ApiClient apiClient;
+  LocationRepo(
+      {required this.apiGoogleMap,
+      required this.apiClient,
+      required this.sharedPreferences});
 
-  Future<Response> getAddressfromGeocode(
-      LatLng origin, LatLng destination) async {
+  Future getAddressfromGeocode(LatLng origin, LatLng destination) async {
     return await apiGoogleMap.getAddress(origin, destination);
   }
 
   String getUserAddress() {
     return sharedPreferences.getString(AppConstants.USER_ADDRESS) ?? '';
+  }
+
+  // add andress function
+
+  Future getAllAndressList() async {
+    return await apiClient.getData(AppConstants.USER_URL);
+  }
+
+  Future<bool> saveUserAddress(String userAddress) async {
+    apiClient.updateHeader(sharedPreferences.getString(AppConstants.TOKEN)!);
+    return await sharedPreferences.setString(
+        AppConstants.USER_ADDRESS, userAddress);
   }
 }

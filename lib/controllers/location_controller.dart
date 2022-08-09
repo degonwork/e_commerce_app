@@ -1,10 +1,12 @@
 import 'dart:convert';
+import 'dart:math';
+import 'package:e_commerce_app_getx/data/models/user_model.dart';
 import 'package:e_commerce_app_getx/data/responsitory/location_repo.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import '../data/models/address_model.dart';
+import '../data/models/address_maps_model.dart';
 
 class LocationController extends GetxController implements GetxService {
   final LocationRepo locationRepo;
@@ -19,9 +21,13 @@ class LocationController extends GetxController implements GetxService {
 
   List<AddressMaps> _addressList = [];
   List<AddressMaps> get addressList => _addressList;
-  late List<AddressMaps> _adllAdressList;
+  late List<AddressMaps> _allAddressList;
+  List<AddressMaps> get allAddressList => _allAddressList;
+
   List<String> _addressTypeList = ["home", "office", "others"];
+  List<String> get addressTypeList => _addressTypeList;
   int _addresTypeIndex = 0;
+  int get addressTypeIndex => _addresTypeIndex;
   late Map<String, dynamic> _getAddress;
   Map<String, dynamic> get getAddress => _getAddress;
   late GoogleMapController _mapController;
@@ -87,6 +93,7 @@ class LocationController extends GetxController implements GetxService {
     } else {
       print("Error getting the google api");
     }
+    update();
     return _address;
   }
 
@@ -99,5 +106,71 @@ class LocationController extends GetxController implements GetxService {
       print(e);
     }
     return _addressModel;
+  }
+
+  void setAddressTypeIndex(int index) {
+    _addresTypeIndex = index;
+    update();
+  }
+
+  Future<void> addAddress(AddressMaps addressMaps) async {
+    _loading = true;
+    update();
+    // function addAdress from locationRepo
+    await getAddressList();
+    await saveUserAddress(addressMaps);
+  }
+
+  Future<void> getAddressList() async {
+    final response = await locationRepo.getAllAndressList();
+    if (response.statusCode == 200) {
+      _addressList = [];
+      _allAddressList = [];
+      List<dynamic> result = jsonDecode(jsonEncode(response.body));
+      for (var element in result) {
+        _addressList.add(
+          AddressMaps(
+              addressType: _addressTypeList[Random().nextInt(3)],
+              contactPersonName: '${User.fromJson(element).name!.firstname}'
+                  ' ${User.fromJson(element).name!.lastname}',
+              contactPersonNumber: '${User.fromJson(element).phone}',
+              address: '${User.fromJson(element).address!.street}'
+                  ','
+                  ' ${User.fromJson(element).address!.city}',
+              latitude: '${User.fromJson(element).address!.geolocation!.lat}',
+              longitude:
+                  '${User.fromJson(element).address!.geolocation!.long}'),
+        );
+        _allAddressList.add(
+          AddressMaps(
+              addressType: _addressTypeList[Random().nextInt(3)],
+              contactPersonName: '${User.fromJson(element).name!.firstname}'
+                  ' ${User.fromJson(element).name!.lastname}',
+              contactPersonNumber: '${User.fromJson(element).phone}',
+              address: '${User.fromJson(element).address!.street}'
+                  ','
+                  ' ${User.fromJson(element).address!.city}',
+              latitude: '${User.fromJson(element).address!.geolocation!.lat}',
+              longitude:
+                  '${User.fromJson(element).address!.geolocation!.long}'),
+        );
+      }
+    } else {
+      _addressList = [];
+      _allAddressList = [];
+    }
+    update();
+  }
+
+  Future saveUserAddress(AddressMaps addressMaps) async {
+    String userAddress = jsonEncode(addressMaps);
+    print("My Address in my view: " + userAddress.toString());
+    return await locationRepo.saveUserAddress(userAddress);
+  }
+
+  void clearAddressList() {
+    _addressList = [];
+    _allAddressList = [];
+    update();
   }
 }

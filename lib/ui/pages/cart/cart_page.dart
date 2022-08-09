@@ -291,6 +291,8 @@ class Cartpage extends StatelessWidget {
                                     .isEmpty) {
                                   print('Logged in');
                                   Get.toNamed(RouteHelper.getAddAddressPage());
+                                } else {
+                                  Get.offNamed(RouteHelper.getInitialPage());
                                 }
                               } else {
                                 Get.toNamed(RouteHelper.getSignInPage());

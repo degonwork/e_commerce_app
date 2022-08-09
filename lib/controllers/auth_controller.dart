@@ -34,7 +34,6 @@ class AuthController extends GetxController {
     late ResponseModel responseModel;
     if (response.statusCode == 200) {
       authRepo.saveUserToken(response.body['token']);
-      print('Your token ' + response.body["token"].toString());
       saveUserNameAndPassword(username, password);
       responseModel = ResponseModel(true, response.body['token']);
     } else {
