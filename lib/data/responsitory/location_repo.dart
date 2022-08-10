@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:dio/dio.dart';
 import 'package:e_commerce_app_getx/data/provider/api_client.dart';
 import 'package:e_commerce_app_getx/data/provider/api_google_map.dart';
@@ -32,5 +34,9 @@ class LocationRepo {
     apiClient.updateHeader(sharedPreferences.getString(AppConstants.TOKEN)!);
     return await sharedPreferences.setString(
         AppConstants.USER_ADDRESS, userAddress);
+  }
+
+  bool isAvilableAddress() {
+    return sharedPreferences.containsKey(AppConstants.USER_ADDRESS);
   }
 }

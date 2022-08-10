@@ -12,8 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../widgets/app_icon.dart';
-
 class AddAddressPage extends StatefulWidget {
   const AddAddressPage({Key? key}) : super(key: key);
 

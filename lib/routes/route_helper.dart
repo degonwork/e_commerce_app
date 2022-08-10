@@ -3,6 +3,7 @@ import 'package:e_commerce_app_getx/ui/pages/cart/cart_page.dart';
 import 'package:e_commerce_app_getx/ui/pages/food/electronics_page_detail.dart';
 import 'package:e_commerce_app_getx/ui/pages/home/home_page.dart';
 import 'package:e_commerce_app_getx/ui/pages/splash/splash_page.dart';
+import '../ui/pages/address/pick_address_maps.dart';
 import '../ui/pages/auth/sign_in_page.dart';
 import '../ui/pages/auth/sign_up_page.dart';
 import '../ui/pages/food/women_clothing_page_detail.dart';
@@ -17,6 +18,7 @@ class RouteHelper {
   static const String womenClothing = '/womenClothing';
   static const String cart = '/cart';
   static const String addAddress = '/add-address';
+  static const String pickAddressMap = '/pick-address';
 
   static String getInitialPage() => '$initial';
   static String getSplashPage() => '$splash';
@@ -28,9 +30,16 @@ class RouteHelper {
       '$womenClothing?pageId=$pageId&page=$page';
   static String getcartPage() => '$cart';
   static String getAddAddressPage() => '$addAddress';
+  static String getPickAddressMapPage() => '$pickAddressMap';
 
   static List<GetPage> routes = [
     GetPage(name: initial, page: () => HomePage()),
+    GetPage(
+        name: pickAddressMap,
+        page: () {
+          PickAddressMap pickAddress = Get.arguments;
+          return pickAddress;
+        }),
     GetPage(name: splash, page: () => SplashPage()),
     GetPage(
         name: signIn, page: () => SignInPage(), transition: Transition.fade),
