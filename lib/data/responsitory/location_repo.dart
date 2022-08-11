@@ -35,8 +35,4 @@ class LocationRepo {
     return await sharedPreferences.setString(
         AppConstants.USER_ADDRESS, userAddress);
   }
-
-  bool isAvilableAddress() {
-    return sharedPreferences.containsKey(AppConstants.USER_ADDRESS);
-  }
 }

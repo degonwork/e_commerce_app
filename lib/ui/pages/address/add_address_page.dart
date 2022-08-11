@@ -4,6 +4,7 @@ import 'package:e_commerce_app_getx/controllers/user_controller.dart';
 import 'package:e_commerce_app_getx/data/models/address_maps_model.dart';
 import 'package:e_commerce_app_getx/data/models/user_model.dart';
 import 'package:e_commerce_app_getx/routes/route_helper.dart';
+import 'package:e_commerce_app_getx/ui/pages/address/pick_address_maps.dart';
 import 'package:e_commerce_app_getx/ui/pages/widgets/app_text_field.dart';
 import 'package:e_commerce_app_getx/ui/pages/widgets/big_text.dart';
 import 'package:e_commerce_app_getx/ui/utils/colors.dart';
@@ -39,6 +40,10 @@ class _AddAddressPageState extends State<AddAddressPage> {
       Get.find<UserController>().getUser();
     }
     if (Get.find<LocationController>().addressList.isNotEmpty) {
+      if (Get.find<LocationController>().getUserFromLocalStorage() == '') {
+        Get.find<LocationController>()
+            .saveUserAddress(Get.find<LocationController>().addressList.last);
+      }
       Get.find<LocationController>().getUserAddress();
       _cameraPosition = CameraPosition(
           target: LatLng(
@@ -103,6 +108,17 @@ class _AddAddressPageState extends State<AddAddressPage> {
                               target: _initialPositon,
                               zoom: Dimensions.width10 * 1.7,
                             ),
+                            onTap: (latLng) {
+                              Get.toNamed(
+                                RouteHelper.getPickAddressMapPage(),
+                                arguments: PickAddressMap(
+                                  fromSignUp: false,
+                                  fromAddress: true,
+                                  googleMapController:
+                                      locationController.mapController,
+                                ),
+                              );
+                            },
                             zoomControlsEnabled: false,
                             compassEnabled: false,
                             indoorViewEnabled: true,

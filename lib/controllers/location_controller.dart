@@ -26,11 +26,13 @@ class LocationController extends GetxController implements GetxService {
 
   List<String> _addressTypeList = ["home", "office", "others"];
   List<String> get addressTypeList => _addressTypeList;
-  int _addresTypeIndex = 0;
-  int get addressTypeIndex => _addresTypeIndex;
+  int _addressTypeIndex = 0;
+  int get addressTypeIndex => _addressTypeIndex;
   late Map<String, dynamic> _getAddress;
   Map<String, dynamic> get getAddress => _getAddress;
   late GoogleMapController _mapController;
+  GoogleMapController get mapController => _mapController;
+
   bool _updateAddressData = true;
   bool _changeAddress = true;
   bool get loading => _loading;
@@ -45,6 +47,7 @@ class LocationController extends GetxController implements GetxService {
       LatLng origin, CameraPosition position, bool fromAddress) async {
     if (_updateAddressData) {
       _loading = true;
+      update();
       try {
         if (fromAddress) {
           _position = Position(
@@ -76,10 +79,11 @@ class LocationController extends GetxController implements GetxService {
               ? _placemark = Placemark(name: _address)
               : _pickPlacemark = Placemark(name: _address);
         }
-        update();
       } catch (e) {
         print(e);
       }
+      _loading = false;
+      update();
     }
   }
 
@@ -109,7 +113,7 @@ class LocationController extends GetxController implements GetxService {
   }
 
   void setAddressTypeIndex(int index) {
-    _addresTypeIndex = index;
+    _addressTypeIndex = index;
     update();
   }
 
@@ -172,5 +176,9 @@ class LocationController extends GetxController implements GetxService {
     _addressList = [];
     _allAddressList = [];
     update();
+  }
+
+  String getUserFromLocalStorage() {
+    return locationRepo.getUserAddress();
   }
 }
