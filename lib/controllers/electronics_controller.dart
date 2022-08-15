@@ -12,12 +12,16 @@ class ElectronicsController extends GetxController {
   ElectronicsController({required this.electronicsRepo});
   List<Product> _electronicsList = [];
   List<Product> get electronicsList => _electronicsList;
+
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
+
   int _quantity = 0;
   int get quantity => _quantity;
+
   int _inCartItem = 0;
   int get inCartItem => _inCartItem + _quantity;
+
   late CartController _cart;
 
   Future<void> getElectronicsList() async {

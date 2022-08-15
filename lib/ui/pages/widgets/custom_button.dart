@@ -26,21 +26,55 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextButton.styleFrom(
+    final ButtonStyle _flatButton = TextButton.styleFrom(
       backgroundColor: onPressed == null
           ? Theme.of(context).disabledColor
           : transparent
               ? Colors.transparent
               : Theme.of(context).primaryColor,
       minimumSize: Size(
-        width == null ? width! : Dimensions.screenWidth,
-        height == null ? height! : Dimensions.height10 * 5,
+        width == null ? Dimensions.screenWidth : width!,
+        height != null ? height! : 50,
       ),
       padding: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(radius),
       ),
     );
-    return Container();
+    return Center(
+      child: SizedBox(
+        width: width ?? Dimensions.screenWidth,
+        height: height ?? 50,
+        child: TextButton(
+          onPressed: onPressed,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              icon != null
+                  ? Padding(
+                      padding: EdgeInsets.only(right: Dimensions.width10 / 2),
+                      child: Icon(
+                        icon,
+                        color: transparent
+                            ? Theme.of(context).primaryColor
+                            : Theme.of(context).cardColor,
+                      ),
+                    )
+                  : const SizedBox(),
+              Text(
+                buttonText,
+                style: TextStyle(
+                  fontSize: fontSize != null ? fontSize : Dimensions.font16,
+                  color: transparent
+                      ? Theme.of(context).primaryColor
+                      : Theme.of(context).cardColor,
+                ),
+              )
+            ],
+          ),
+          style: _flatButton,
+        ),
+      ),
+    );
   }
 }

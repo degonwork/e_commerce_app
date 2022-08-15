@@ -2,7 +2,6 @@ import 'package:e_commerce_app_getx/controllers/auth_controller.dart';
 import 'package:e_commerce_app_getx/controllers/location_controller.dart';
 import 'package:e_commerce_app_getx/controllers/user_controller.dart';
 import 'package:e_commerce_app_getx/data/models/address_maps_model.dart';
-import 'package:e_commerce_app_getx/data/models/user_model.dart';
 import 'package:e_commerce_app_getx/routes/route_helper.dart';
 import 'package:e_commerce_app_getx/ui/pages/address/pick_address_maps.dart';
 import 'package:e_commerce_app_getx/ui/pages/widgets/app_text_field.dart';
@@ -30,7 +29,6 @@ class _AddAddressPageState extends State<AddAddressPage> {
     zoom: 17,
   );
   LatLng _initialPositon = LatLng(45.51563, -122.677433);
-  LatLng _changePositon = LatLng(45.51563, -122.677433);
 
   @override
   void initState() {
@@ -126,8 +124,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                             myLocationEnabled: true,
                             onCameraIdle: () {
                               locationController.updatePosition(
-                                  _changePositon, _cameraPosition, true);
-                              _changePositon = _cameraPosition.target;
+                                  _cameraPosition, true);
                             },
                             onCameraMove: (position) =>
                                 _cameraPosition = position,

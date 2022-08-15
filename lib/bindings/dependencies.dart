@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:e_commerce_app_getx/controllers/auth_controller.dart';
 import 'package:e_commerce_app_getx/controllers/electronics_controller.dart';
 import 'package:e_commerce_app_getx/controllers/location_controller.dart';
@@ -22,14 +21,11 @@ Future<void> init() async {
   final sharedPreference = await SharedPreferences.getInstance();
   Get.lazyPut(() => sharedPreference);
 
-  // dio
-  final Dio dio = Dio();
-  Get.lazyPut(() => dio);
-
   // api
   Get.lazyPut(() => ApiClient(
       appBaseUrl: AppConstants.BASE_URL, sharedPreferences: Get.find()));
-  Get.lazyPut(() => ApiGoogleMap(dio: Get.find()));
+  Get.lazyPut(
+      () => ApiGoogleMap(appBaseUrl: AppConstants.BASE_GOOGLE_MAPS_URL));
 
   // repo
   Get.lazyPut(

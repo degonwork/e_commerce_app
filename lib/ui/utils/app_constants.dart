@@ -6,7 +6,7 @@ class AppConstants {
   // Base url
   static const String BASE_URL = 'https://fakestoreapi.com';
   static const String BASE_GOOGLE_MAPS_URL =
-      'https://maps.googleapis.com/maps/api/directions/json?';
+      'https://maps.googleapis.com/maps/api';
 
   // Product
   static const String ELECTRONICS_URL = "/products/category/electronics";
@@ -17,7 +17,7 @@ class AppConstants {
   static const String USER_URL = "/users";
   static const String LOGIN_URL = "/auth/login";
 
-  // Token and routes
+  // Token and share preference
   static const String TOKEN = "DBtoken";
   static const String IDUSER = "Id-user";
   static const String USERNAME = "Username";
@@ -29,7 +29,12 @@ class AppConstants {
   static String GEOCODE_URL = "";
   static String USER_ADDRESS = "User-address";
 
+  // Google maps
+  static const String GOOGLE_MAPS_URL = "/geocode/json?";
+  static const String SEARCH_LOCATION_URL = "/place/autocomplete/json?";
+  static const String PLACE_DETAILS_URL = "/place/details/json?";
+
   // Api key google maps
   static const String GOOGLE_API_KEY =
-      "AIzaSyAERKSFYMxdSR6mrMmgyesmQOr8miAFd4c";
+      "AIzaSyCMESvjp3G5FtPnukZ28_GVOuFSvEhSS9c";
 }

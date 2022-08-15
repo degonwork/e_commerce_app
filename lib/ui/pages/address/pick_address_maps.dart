@@ -1,4 +1,7 @@
 import 'package:e_commerce_app_getx/controllers/location_controller.dart';
+import 'package:e_commerce_app_getx/routes/route_helper.dart';
+import 'package:e_commerce_app_getx/ui/pages/address/widgets/search_location_dialog_page.dart';
+import 'package:e_commerce_app_getx/ui/pages/widgets/custom_button.dart';
 import 'package:e_commerce_app_getx/ui/utils/colors.dart';
 import 'package:e_commerce_app_getx/ui/utils/dimension.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +33,7 @@ class _PickAddressMapState extends State<PickAddressMap> {
   void initState() {
     super.initState();
     if (Get.find<LocationController>().addressList.isEmpty) {
-      _initialPosition = LatLng(45.521563, -122.677433);
-      _changePosition = LatLng(45.521563, -122.677433);
+      _initialPosition = LatLng(45.51563, -122.677433);
 
       _cameraPosition = CameraPosition(
           target: _initialPosition, zoom: Dimensions.width10 * 1.7);
@@ -72,9 +74,11 @@ class _PickAddressMapState extends State<PickAddressMap> {
                         _cameraPosition = cameraPosition;
                       },
                       onCameraIdle: () {
-                        Get.find<LocationController>().updatePosition(
-                            _changePosition, _cameraPosition, false);
-                        _changePosition = _cameraPosition.target;
+                        Get.find<LocationController>()
+                            .updatePosition(_cameraPosition, false);
+                      },
+                      onMapCreated: (GoogleMapController mapController) {
+                        _mapController = mapController;
                       },
                     ),
                     Center(
@@ -90,33 +94,96 @@ class _PickAddressMapState extends State<PickAddressMap> {
                       top: Dimensions.height45,
                       left: Dimensions.width20,
                       right: Dimensions.width20,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: Dimensions.width10),
-                        height: Dimensions.height10 * 5,
-                        decoration: BoxDecoration(
-                          color: AppColors.mainColor,
-                          borderRadius:
-                              BorderRadius.circular(Dimensions.radius20 / 2),
+                      child: InkWell(
+                        onTap: () => Get.dialog(
+                          SearchLocationDialogue(
+                            mapController: _mapController,
+                          ),
                         ),
-                        child: Row(
-                          children: [
-                            Icon(Icons.location_on,
-                                size: Dimensions.width10 * 2.5,
-                                color: AppColors.yellowColor),
-                            Expanded(
-                              child: Text(
-                                '${locationController.pickPlacemark.name ?? ''}',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: Dimensions.font16),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: Dimensions.width10),
+                          height: Dimensions.height10 * 5,
+                          decoration: BoxDecoration(
+                            color: AppColors.mainColor,
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.radius20 / 2),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(Icons.location_on,
+                                  size: Dimensions.width10 * 2.5,
+                                  color: AppColors.yellowColor),
+                              Expanded(
+                                child: Text(
+                                  '${locationController.pickPlacemark.name ?? ''}',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: Dimensions.font16),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
-                            ),
-                          ],
+                              SizedBox(width: Dimensions.width10),
+                              Icon(Icons.search,
+                                  size: Dimensions.width10 * 2.5,
+                                  color: AppColors.yellowColor),
+                            ],
+                          ),
                         ),
                       ),
+                    ),
+                    Positioned(
+                      bottom: Dimensions.height10 * 8,
+                      left: Dimensions.width20,
+                      right: Dimensions.width20,
+                      child: locationController.isLoading
+                          ? Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : CustomButton(
+                              buttonText: locationController.inZone
+                                  ? widget.fromAddress
+                                      ? "Pick Address"
+                                      : "Pick Location"
+                                  : "Service is not available in your area",
+                              onPressed: (locationController.buttonDisable ||
+                                      locationController.loading)
+                                  ? null
+                                  : () {
+                                      if (locationController
+                                                  .pickPosition.latitude !=
+                                              0 &&
+                                          locationController
+                                                  .pickPlacemark.name !=
+                                              null) {
+                                        if (widget.fromAddress) {
+                                          if (widget.googleMapController !=
+                                              null) {
+                                            widget.googleMapController!
+                                                .moveCamera(
+                                              CameraUpdate.newCameraPosition(
+                                                CameraPosition(
+                                                    target: LatLng(
+                                                      locationController
+                                                          .pickPosition
+                                                          .latitude,
+                                                      locationController
+                                                          .pickPosition
+                                                          .longitude,
+                                                    ),
+                                                    zoom: Dimensions.width10 *
+                                                        1.7),
+                                              ),
+                                            );
+                                            locationController
+                                                .setAddAddressData();
+                                          }
+                                          Get.back();
+                                        }
+                                      }
+                                    },
+                            ),
                     ),
                   ],
                 ),

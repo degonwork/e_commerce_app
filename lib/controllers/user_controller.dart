@@ -9,8 +9,10 @@ class UserController extends GetxController implements GetxService {
   UserController({required this.userRepo});
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+
   List<User> _listUser = [];
   List<User> get listUser => _listUser;
+
   User? _user;
   User? get user => _user;
 

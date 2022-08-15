@@ -3,6 +3,7 @@ import 'package:e_commerce_app_getx/controllers/electronics_controller.dart';
 import 'package:e_commerce_app_getx/controllers/user_controller.dart';
 import 'package:e_commerce_app_getx/controllers/women_clothing_controller.dart';
 import 'package:e_commerce_app_getx/routes/route_helper.dart';
+import 'package:e_commerce_app_getx/ui/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:e_commerce_app_getx/bindings/dependencies.dart' as dep;
@@ -27,9 +28,7 @@ class MyApp extends StatelessWidget {
               return GetMaterialApp(
                 debugShowCheckedModeBanner: false,
                 title: 'Flutter Demo',
-                theme: ThemeData(
-                  primarySwatch: Colors.blue,
-                ),
+                theme: ThemeData(primaryColor: AppColors.mainColor),
                 initialRoute: RouteHelper.getSplashPage(),
                 getPages: RouteHelper.routes,
               );

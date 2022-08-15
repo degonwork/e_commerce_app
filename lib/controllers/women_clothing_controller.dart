@@ -8,6 +8,7 @@ class WomenClothingController extends GetxController {
   WomenClothingController({required this.womenClothingRepo});
   List<Product> _womenClothingList = [];
   List<Product> get womenClothingList => _womenClothingList;
+
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
 
