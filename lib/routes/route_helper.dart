@@ -1,7 +1,9 @@
+import 'package:e_commerce_app_getx/data/models/order_model.dart';
 import 'package:e_commerce_app_getx/ui/pages/address/add_address_page.dart';
 import 'package:e_commerce_app_getx/ui/pages/cart/cart_page.dart';
 import 'package:e_commerce_app_getx/ui/pages/food/electronics_page_detail.dart';
 import 'package:e_commerce_app_getx/ui/pages/home/home_page.dart';
+import 'package:e_commerce_app_getx/ui/pages/payment/payment_page.dart';
 import 'package:e_commerce_app_getx/ui/pages/splash/splash_page.dart';
 import '../ui/pages/address/pick_address_maps.dart';
 import '../ui/pages/auth/sign_in_page.dart';
@@ -19,6 +21,8 @@ class RouteHelper {
   static const String cart = '/cart';
   static const String addAddress = '/add-address';
   static const String pickAddressMap = '/pick-address';
+  static const String payment = '/payment';
+  static const String orderSuccess = '/order-successful';
 
   static String getInitialPage() => '$initial';
   static String getSplashPage() => '$splash';
@@ -31,6 +35,9 @@ class RouteHelper {
   static String getcartPage() => '$cart';
   static String getAddAddressPage() => '$addAddress';
   static String getPickAddressMapPage() => '$pickAddressMap';
+  static String getPaymentPage(String id, int userID) =>
+      '$payment?id=$id&userID=$userID';
+  static String getOrderSuccessPage() => '$pickAddressMap';
 
   static List<GetPage> routes = [
     GetPage(name: initial, page: () => HomePage()),
@@ -74,5 +81,14 @@ class RouteHelper {
           return AddAddressPage();
         },
         transition: Transition.fadeIn),
+    GetPage(
+        name: payment,
+        page: () => PaymentPage(
+              orderModel: OrderModel(
+                id: int.parse(Get.parameters['id']!),
+                userId: int.parse(Get.parameters['userID']!),
+              ),
+            )),
+    // GetPage(name: orderSuccess, page: () => OrderSuccessPage()),
   ];
 }

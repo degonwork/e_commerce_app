@@ -33,6 +33,7 @@ class AppConstants {
   static const String GOOGLE_MAPS_URL = "/geocode/json?";
   static const String SEARCH_LOCATION_URL = "/place/autocomplete/json?";
   static const String PLACE_DETAILS_URL = "/place/details/json?";
+  static const String PLACE_ORDER_URL = "";
 
   // Api key google maps
   static const String GOOGLE_API_KEY =
