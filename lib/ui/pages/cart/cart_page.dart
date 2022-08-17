@@ -2,7 +2,6 @@ import 'package:e_commerce_app_getx/controllers/auth_controller.dart';
 import 'package:e_commerce_app_getx/controllers/cart_controller.dart';
 import 'package:e_commerce_app_getx/controllers/electronics_controller.dart';
 import 'package:e_commerce_app_getx/controllers/location_controller.dart';
-import 'package:e_commerce_app_getx/controllers/user_controller.dart';
 import 'package:e_commerce_app_getx/controllers/women_clothing_controller.dart';
 import 'package:e_commerce_app_getx/ui/pages/widgets/app_icon.dart';
 import 'package:e_commerce_app_getx/ui/pages/widgets/big_text.dart';
@@ -292,10 +291,8 @@ class Cartpage extends StatelessWidget {
                                     .isEmpty) {
                                   Get.toNamed(RouteHelper.getAddAddressPage());
                                 } else {
-                                  // Get.offNamed(RouteHelper.getInitialPage());
-                                  // Get.offNamed(RouteHelper.getPaymentPage(
-                                  //     '100127',
-                                  //     Get.find<UserController>().user!.id!));
+                                  Get.find<CartController>().addToHistory();
+                                  Get.toNamed(RouteHelper.getInitialPage());
                                 }
                               } else {
                                 Get.toNamed(RouteHelper.getSignInPage());
