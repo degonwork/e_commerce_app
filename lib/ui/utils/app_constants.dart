@@ -13,6 +13,9 @@ class AppConstants {
   static const String WOMEN_CLOTHING_URL =
       "/products/category/women's clothing";
 
+  // Order
+  static const String ORDER_LIST_URL = "/carts";
+
   // Authenticate
   static const String USER_URL = "/users";
   static const String LOGIN_URL = "/auth/login";

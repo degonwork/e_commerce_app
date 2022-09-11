@@ -1,6 +1,7 @@
 import 'package:e_commerce_app_getx/ui/pages/account/account_page.dart';
 import 'package:e_commerce_app_getx/ui/pages/cart/cart_history_page.dart';
 import 'package:e_commerce_app_getx/ui/pages/home/main_product_page.dart';
+import 'package:e_commerce_app_getx/ui/pages/order/order_page.dart';
 import 'package:e_commerce_app_getx/ui/utils/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -13,12 +14,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectIndex = 0;
-  List pages = [
-    MainFoodPage(),
-    Container(child: Center(child: Text('Next page'))),
-    CartHistoryPage(),
-    AccountPage()
-  ];
+  List pages = [MainFoodPage(), OrderPage(), CartHistoryPage(), AccountPage()];
 
   void onTapNav(int index) {
     setState(() {
