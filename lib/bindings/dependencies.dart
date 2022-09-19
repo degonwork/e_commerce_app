@@ -19,7 +19,6 @@ import '../data/responsitory/cart_repo.dart';
 import '../ui/utils/app_constants.dart';
 
 Future<void> init() async {
-  // shared preference
   final sharedPreference = await SharedPreferences.getInstance();
   Get.lazyPut(() => sharedPreference);
 
@@ -41,7 +40,8 @@ Future<void> init() async {
       apiGoogleMap: Get.find(),
       apiClient: Get.find(),
       sharedPreferences: Get.find()));
-  Get.lazyPut(() => OrderRepo(apiClient: Get.find()));
+  Get.lazyPut(
+      () => OrderRepo(apiClient: Get.find(), sharedPreferences: Get.find()));
 
   // controller
   Get.lazyPut(() => UserController(userRepo: Get.find()));

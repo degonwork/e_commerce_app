@@ -1,6 +1,6 @@
 class Order {
   Order({
-    required this.id,
+    this.id,
     required this.userId,
     required this.date,
     required this.products,

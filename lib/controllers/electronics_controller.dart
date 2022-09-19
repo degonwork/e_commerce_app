@@ -24,6 +24,7 @@ class ElectronicsController extends GetxController {
 
   late CartController _cart;
 
+  // Get list electronics product
   Future<void> getElectronicsList() async {
     Response response = await electronicsRepo.getElectronicsList();
     if (response.statusCode == 200) {

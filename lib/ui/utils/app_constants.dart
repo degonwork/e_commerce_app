@@ -28,6 +28,7 @@ class AppConstants {
 
   static const String CART_LIST = "Cart-list";
   static const String CART_HISTORY_LIST = "Cart-history-list";
+  static const String ORDER_LIST = "Order-list";
 
   static String GEOCODE_URL = "";
   static String USER_ADDRESS = "User-address";

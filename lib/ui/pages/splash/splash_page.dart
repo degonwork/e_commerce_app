@@ -1,10 +1,8 @@
 import 'dart:async';
-
 import 'package:e_commerce_app_getx/routes/route_helper.dart';
 import 'package:e_commerce_app_getx/ui/utils/dimension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../controllers/electronics_controller.dart';
 import '../../../controllers/user_controller.dart';
 import '../../../controllers/women_clothing_controller.dart';
@@ -34,6 +32,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         AnimationController(vsync: this, duration: const Duration(seconds: 2))
           ..forward();
     animation = CurvedAnimation(parent: controller, curve: Curves.linear);
+    // Navigator to home page after 3 seconds
     Timer(
         Duration(seconds: 3), () => Get.offNamed(RouteHelper.getInitialPage()));
   }

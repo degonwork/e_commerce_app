@@ -6,7 +6,7 @@ import 'package:e_commerce_app_getx/routes/route_helper.dart';
 import 'package:e_commerce_app_getx/ui/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:e_commerce_app_getx/bindings/dependencies.dart' as dep;
+import 'bindings/dependencies.dart' as dep;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

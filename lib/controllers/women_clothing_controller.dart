@@ -12,6 +12,7 @@ class WomenClothingController extends GetxController {
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
 
+  // Get list womenClothing product
   Future<void> getWomenClothingList() async {
     Response response = await womenClothingRepo.getWomenClothingList();
     if (response.statusCode == 200) {

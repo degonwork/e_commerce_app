@@ -2,6 +2,7 @@ import 'package:e_commerce_app_getx/controllers/auth_controller.dart';
 import 'package:e_commerce_app_getx/controllers/order_controller.dart';
 import 'package:e_commerce_app_getx/routes/route_helper.dart';
 import 'package:e_commerce_app_getx/ui/pages/order/view_order.dart';
+import 'package:e_commerce_app_getx/ui/pages/widgets/custom_app_bar.dart';
 import 'package:e_commerce_app_getx/ui/utils/colors.dart';
 import 'package:e_commerce_app_getx/ui/utils/dimension.dart';
 import 'package:flutter/material.dart';
@@ -26,20 +27,14 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
     if (_isLoggedIn) {
       _tapController = TabController(length: 2, vsync: this);
       Get.find<OrderController>().getOrderList();
+      Get.find<OrderController>().getCurrentOrderList();
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "My Orders",
-        ),
-        centerTitle: true,
-        backgroundColor: AppColors.mainColor,
-        leading: Container(),
-      ),
+      appBar: CustomAppBar(title: "My orders"),
       body: Center(
           child: _isLoggedIn
               ? Column(

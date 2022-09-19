@@ -31,7 +31,7 @@ class UserController extends GetxController implements GetxService {
     update();
   }
 
-  void getUser() {
+  User? getUser() {
     _isLoading = true;
     String username = userRepo.getUsername();
     String password = userRepo.getPassword();
@@ -42,5 +42,6 @@ class UserController extends GetxController implements GetxService {
         }
       }
     }
+    return _user;
   }
 }

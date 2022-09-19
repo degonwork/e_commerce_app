@@ -3,6 +3,7 @@ import 'package:e_commerce_app_getx/ui/pages/home/product_page_body.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../controllers/cart_controller.dart';
 import '../../../controllers/electronics_controller.dart';
 import '../../../controllers/women_clothing_controller.dart';
 import '../../utils/colors.dart';
@@ -22,6 +23,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
     await Get.find<ElectronicsController>().getElectronicsList();
     await Get.find<WomenClothingController>().getWomenClothingList();
     await Get.find<UserController>().getListUserInfo();
+    Get.find<CartController>().getCartData();
   }
 
   @override

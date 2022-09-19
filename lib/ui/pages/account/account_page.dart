@@ -6,6 +6,7 @@ import 'package:e_commerce_app_getx/routes/route_helper.dart';
 import 'package:e_commerce_app_getx/ui/pages/widgets/account_widget.dart';
 import 'package:e_commerce_app_getx/ui/pages/widgets/app_icon.dart';
 import 'package:e_commerce_app_getx/ui/pages/widgets/big_text.dart';
+import 'package:e_commerce_app_getx/ui/pages/widgets/custom_app_bar.dart';
 import 'package:e_commerce_app_getx/ui/pages/widgets/custom_loader.dart';
 import 'package:e_commerce_app_getx/ui/pages/widgets/show_custom_snackbar.dart';
 import 'package:e_commerce_app_getx/ui/utils/colors.dart';
@@ -23,15 +24,7 @@ class AccountPage extends StatelessWidget {
       Get.find<UserController>().getUser();
     }
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColors.mainColor,
-          title: BigText(
-            text: 'Profile',
-            size: 24,
-            color: Colors.white,
-          ),
-          centerTitle: true,
-        ),
+        appBar: CustomAppBar(title: "Profile"),
         body: GetBuilder<UserController>(
           builder: (userController) {
             return userLoggedIn
